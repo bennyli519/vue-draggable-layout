@@ -236,25 +236,25 @@ export const advanceComponents = [
       defaultType: 'String'
     }
   },
-  // {
-  //   type: 'imgupload',
-  //   name: '图片',
-  //   icon: 'icon-tupian',
-  //   options: {
-  //     defaultValue: [],
-  //     size: {
-  //       width: 100,
-  //       height: 100,
-  //     },
-  //     width: '',
-  //     tokenFunc: 'funcGetToken',
-  //     token: '',
-  //     domain: 'http://pfp81ptt6.bkt.clouddn.com/',
-  //     disabled: false,
-  //     length: 8,
-  //     multiple: true
-  //   }
-  // },
+  {
+    type: 'imgupload',
+    name: '图片',
+    icon: 'icon-tupian',
+    options: {
+      defaultValue: [],
+      size: {
+        width: 100,
+        height: 100,
+      },
+      width: '',
+      tokenFunc: 'funcGetToken',
+      token: '',
+      domain: 'http://pfp81ptt6.bkt.clouddn.com/',
+      disabled: false,
+      length: 8,
+      multiple: true
+    }
+  },
   {
     type: 'editor',
     name: '编辑器',
