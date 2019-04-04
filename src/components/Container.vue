@@ -6,7 +6,7 @@
 
           <div class="components-list">
             <!-- 布局 -->
-            <!-- <div class="widget-cate">布局设置</div>
+            <div class="widget-cate">布局设置</div>
             <draggable tag="ul" :list="layoutComponents" 
               v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}"
               @start="handleMoveStart"
@@ -20,9 +20,9 @@
                   <span>{{item.name}}</span>
                 </a>
               </li>
-            </draggable> -->
+            </draggable>
             <!-- 基础 -->
-            <!-- <div class="widget-cate">基础字段</div> -->
+            <div class="widget-cate">基础字段</div>
             <draggable tag="ul" :list="basicComponents" 
               v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}"
               @start="handleMoveStart"

@@ -73,36 +73,36 @@ export const basicComponents = [
       remoteFunc: ''
     }
   },
-  // {
-  //   type: 'checkbox',
-  //   name: '多选框组',
-  //   icon: 'icon-check-box',
-  //   options: {
-  //     inline: false,
-  //     defaultValue: [],
-  //     showLabel: false,
-  //     options: [
-  //       {
-  //         value: '选项1'
-  //       },
-  //       {
-  //         value: '选项2'
-  //       },
-  //       {
-  //         value: '选项3'
-  //       }
-  //     ],
-  //     required: false,
-  //     width: '',
-  //     remote: false,
-  //     remoteOptions: [],
-  //     props: {
-  //       value: 'value',
-  //       label: 'label'
-  //     },
-  //     remoteFunc: ''
-  //   }
-  // },
+  {
+    type: 'checkbox',
+    name: '多选框组',
+    icon: 'icon-check-box',
+    options: {
+      inline: false,
+      defaultValue: [],
+      showLabel: false,
+      options: [
+        {
+          value: '选项1'
+        },
+        {
+          value: '选项2'
+        },
+        {
+          value: '选项3'
+        }
+      ],
+      required: false,
+      width: '',
+      remote: false,
+      remoteOptions: [],
+      props: {
+        value: 'value',
+        label: 'label'
+      },
+      remoteFunc: ''
+    }
+  },
   {
     type: 'time',
     name: '时间选择器',
@@ -123,26 +123,26 @@ export const basicComponents = [
       width: '',
     }
   },
-  // {
-  //   type: 'date',
-  //   name: '日期选择器',
-  //   icon: 'icon-date',
-  //   options: {
-  //     defaultValue: '',
-  //     readonly: false,
-  //     disabled: false,
-  //     editable: true,
-  //     clearable: true,
-  //     placeholder: '',
-  //     startPlaceholder: '',
-  //     endPlaceholder: '',
-  //     type: 'date',
-  //     format: 'yyyy-MM-dd',
-  //     timestamp: false,
-  //     required: false,
-  //     width: '',
-  //   }
-  // },
+  {
+    type: 'date',
+    name: '日期选择器',
+    icon: 'icon-date',
+    options: {
+      defaultValue: '',
+      readonly: false,
+      disabled: false,
+      editable: true,
+      clearable: true,
+      placeholder: '',
+      startPlaceholder: '',
+      endPlaceholder: '',
+      type: 'date',
+      format: 'yyyy-MM-dd',
+      timestamp: false,
+      required: false,
+      width: '',
+    }
+  },
   {
     type: 'rate',
     name: '评分',
@@ -166,39 +166,39 @@ export const basicComponents = [
       required: false
     }
   },
-  // {
-  //   type: 'select',
-  //   name: '下拉选择框',
-  //   icon: 'icon-select',
-  //   options: {
-  //     defaultValue: '',
-  //     multiple: false,
-  //     disabled: false,
-  //     clearable: false,
-  //     placeholder: '',
-  //     required: false,
-  //     showLabel: false,
-  //     width: '',
-  //     options: [
-  //       {
-  //         value: '下拉框1'
-  //       },
-  //       {
-  //         value: '下拉框2'
-  //       },{
-  //         value: '下拉框3'
-  //       }
-  //     ],
-  //     remote: false,
-  //     filterable: false,
-  //     remoteOptions: [],
-  //     props: {
-  //       value: 'value',
-  //       label: 'label'
-  //     },
-  //     remoteFunc: ''
-  //   }
-  // },
+  {
+    type: 'select',
+    name: '下拉选择框',
+    icon: 'icon-select',
+    options: {
+      defaultValue: '',
+      multiple: false,
+      disabled: false,
+      clearable: false,
+      placeholder: '',
+      required: false,
+      showLabel: false,
+      width: '',
+      options: [
+        {
+          value: '下拉框1'
+        },
+        {
+          value: '下拉框2'
+        },{
+          value: '下拉框3'
+        }
+      ],
+      remote: false,
+      filterable: false,
+      remoteOptions: [],
+      props: {
+        value: 'value',
+        label: 'label'
+      },
+      remoteFunc: ''
+    }
+  },
   {
     type: 'switch',
     name: '开关',
@@ -209,22 +209,22 @@ export const basicComponents = [
       disabled: false,
     }
   },
-  // {
-  //   type: 'slider',
-  //   name: '滑块',
-  //   icon: 'icon-slider',
-  //   options: {
-  //     defaultValue: 0,
-  //     disabled: false,
-  //     required: false,
-  //     min: 0,
-  //     max: 100,
-  //     step: 1,
-  //     showInput: false,
-  //     range: false,
-  //     width: ''
-  //   }
-  // }
+  {
+    type: 'slider',
+    name: '滑块',
+    icon: 'icon-slider',
+    options: {
+      defaultValue: 0,
+      disabled: false,
+      required: false,
+      min: 0,
+      max: 100,
+      step: 1,
+      showInput: false,
+      range: false,
+      width: ''
+    }
+  }
 ]
 
 export const advanceComponents = [
