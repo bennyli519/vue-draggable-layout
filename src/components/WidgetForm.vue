@@ -11,6 +11,28 @@
       >
 
         <template v-for="(element, index) in data.list">
+          <template v-if="element.type == 'panel'">
+            <div style="position: relative;height:600px;width:100%;border:1px solid #ddd;">
+               <draggable
+                  class="widget-form-list" 
+                  style="padding-bottom: 50px;"
+                  v-model="col.list"
+                  filter="widget-grid-container"
+                  v-bind="{group:'people', ghostClass: 'ghost'}"
+                  @end="handleMoveEnd"
+                  @add="handleWidgetColAdd($event, element, colIndex)"
+                >
+                  <widget-form-item 
+                    v-for="(el, i) in col.list"
+                    :key="el.key"
+                    v-if="el.key"
+                    :element="el" 
+                    :select.sync="selectWidget" 
+                    :index="i" 
+                    :data="col"></widget-form-item>
+                </draggable>
+            </div>
+          </template>
           <template v-if="element.type == 'grid'">
             <div v-if="element && element.key"  class="widget-grid-container data-grid" :key="element.key" style="position: relative;">
               <el-row class="widget-grid "
@@ -50,9 +72,9 @@
               </el-button>
             </div>
           </template>
-          <template v-else>
+          <!-- <template v-else>
             <widget-form-item v-if="element && element.key"  :key="element.key" :element="element" :select.sync="selectWidget" :index="index" :data="data"></widget-form-item>
-          </template>
+          </template> -->
         </template>
             
       </draggable>
@@ -76,6 +98,7 @@ export default {
     }
   },
   mounted () {
+    console.log(this.data)
     document.body.ondrop = function (event) {
       let isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
       if (isFirefox) {
@@ -135,23 +158,23 @@ export default {
       this.selectWidget = this.data.list[newIndex]
     },
     handleWidgetColAdd ($event, row, colIndex) {
-      console.log('coladd', $event, row, colIndex)
+      console.log('列添加内容:', $event, row, colIndex)
       const newIndex = $event.newIndex
       const oldIndex = $event.oldIndex
       const item = $event.item
 
       // 防止布局元素的嵌套拖拽
-      if (item.className.indexOf('data-grid') >= 0) {
+      // if (item.className.indexOf('data-grid') >= 0) {
 
-        // 如果是列表中拖拽的元素需要还原到原来位置
-        item.tagName === 'DIV' && this.data.list.splice(oldIndex, 0, row.columns[colIndex].list[newIndex])
+      //   // 如果是列表中拖拽的元素需要还原到原来位置
+      //   item.tagName === 'DIV' && this.data.list.splice(oldIndex, 0, row.columns[colIndex].list[newIndex])
 
-        row.columns[colIndex].list.splice(newIndex, 1)
+      //   row.columns[colIndex].list.splice(newIndex, 1)
 
-        return false
-      }
+      //   return false
+      // }
 
-      console.log('from', item)
+      console.log('来自：', item)
 
       const key = Date.parse(new Date()) + '_' + Math.ceil(Math.random() * 99999)
 
@@ -167,17 +190,17 @@ export default {
         rules: []
       })
 
-      if (row.columns[colIndex].list[newIndex].type === 'radio' || row.columns[colIndex].list[newIndex].type === 'checkbox' || this.data.list[newIndex].type === 'select') {
-        this.$set(row.columns[colIndex].list, newIndex, {
-          ...row.columns[colIndex].list[newIndex],
-          options: {
-            ...row.columns[colIndex].list[newIndex].options,
-            options: row.columns[colIndex].list[newIndex].options.options.map(item => ({
-              ...item
-            }))
-          }
-        })
-      }
+      // if (row.columns[colIndex].list[newIndex].type === 'radio' || row.columns[colIndex].list[newIndex].type === 'checkbox' || this.data.list[newIndex].type === 'select') {
+      //   this.$set(row.columns[colIndex].list, newIndex, {
+      //     ...row.columns[colIndex].list[newIndex],
+      //     options: {
+      //       ...row.columns[colIndex].list[newIndex].options,
+      //       options: row.columns[colIndex].list[newIndex].options.options.map(item => ({
+      //         ...item
+      //       }))
+      //     }
+      //   })
+      // }
 
       this.selectWidget = row.columns[colIndex].list[newIndex]
     },
