@@ -6,7 +6,7 @@
 
           <div class="components-list">
              <!-- 布局 -->
-            <div class="widget-cate">面板列</div>
+            <!-- <div class="widget-cate">面板列</div>
             <draggable tag="ul" :list="panel" 
               v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}"
               @start="handleMoveStart"
@@ -19,7 +19,7 @@
                   <span>{{item.name}}</span>
                 </a>
               </li>
-            </draggable>
+            </draggable> -->
             <!-- 布局 -->
             <div class="widget-cate">布局设置</div>
             <draggable tag="ul" :list="layoutComponents" 

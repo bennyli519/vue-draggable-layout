@@ -11,28 +11,20 @@
       >
 
         <template v-for="(element, index) in data.list">
-          <template v-if="element.type == 'panel'">
+          <!-- <template v-if="element.type == 'panel'">
             <div style="position: relative;height:600px;width:100%;border:1px solid #ddd;">
                <draggable
                   class="widget-form-list" 
                   style="padding-bottom: 50px;"
-                  v-model="col.list"
                   filter="widget-grid-container"
                   v-bind="{group:'people', ghostClass: 'ghost'}"
                   @end="handleMoveEnd"
                   @add="handleWidgetColAdd($event, element, colIndex)"
                 >
-                  <widget-form-item 
-                    v-for="(el, i) in col.list"
-                    :key="el.key"
-                    v-if="el.key"
-                    :element="el" 
-                    :select.sync="selectWidget" 
-                    :index="i" 
-                    :data="col"></widget-form-item>
+                    爸爸是面板
                 </draggable>
             </div>
-          </template>
+          </template> -->
           <template v-if="element.type == 'grid'">
             <div v-if="element && element.key"  class="widget-grid-container data-grid" :key="element.key" style="position: relative;">
               <el-row class="widget-grid "

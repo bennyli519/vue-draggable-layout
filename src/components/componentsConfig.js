@@ -80,7 +80,23 @@ export const panel = [
 export const layoutComponents = [
   {
     type: 'grid',
-    name: '栅格布局',
+    name: '一整行(24)',
+    icon: 'icon-grid-',
+    columns: [
+      {
+        span: 24,
+        list: []
+      },
+    ],
+    options: {
+      gutter: 0,
+      justify: 'start',
+      align: 'top'
+    }
+  },
+  {
+    type: 'grid',
+    name: '一行2列(12:12)',
     icon: 'icon-grid-',
     columns: [
       {
@@ -97,5 +113,57 @@ export const layoutComponents = [
       justify: 'start',
       align: 'top'
     }
-  }
+  },
+  {
+    type: 'grid',
+    name: '一行3列(8:8:8)',
+    icon: 'icon-grid-',
+    columns: [
+      {
+        span: 8,
+        list: []
+      },
+      {
+        span: 8,
+        list: []
+      },
+      {
+        span: 8,
+        list: []
+      },
+    ],
+    options: {
+      gutter: 0,
+      justify: 'start',
+      align: 'top'
+    }
+  },
+  {
+    type: 'grid',
+    name: '一行4列(6:6:6:6)',
+    icon: 'icon-grid-',
+    columns: [
+      {
+        span: 6,
+        list: []
+      },
+      {
+        span: 6,
+        list: []
+      },
+      {
+        span: 6,
+        list: []
+      },
+      {
+        span: 6,
+        list: []
+      }
+    ],
+    options: {
+      gutter: 0,
+      justify: 'start',
+      align: 'top'
+    }
+  },
 ]
