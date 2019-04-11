@@ -9,7 +9,6 @@
         @end="handleMoveEnd"
         @add="handleWidgetAdd"
       >
-
         <template v-for="(element, index) in data.list">
           <template v-if="element.type == 'grid'">
             <div v-if="element && element.key"  class="widget-grid-container data-grid" :key="element.key" style="position: relative;">
@@ -25,7 +24,7 @@
                       class="panel-style"
                       v-model="col.list"
                       filter="widget-grid-container"
-                      v-bind="{group:'people',sort:true, ghostClass: 'ghost'}"
+                      v-bind="{group:'people',sort:false, ghostClass: 'ghost'}"
                       @end="handleMoveEnd"
                       @add="handleWidgetColAdd($event, element, colIndex)"
                     >
@@ -54,9 +53,6 @@
               </el-button>
             </div>
           </template>
-          <!-- <template v-else>
-            <widget-form-item v-if="element && element.key"  :key="element.key" :element="element" :select.sync="selectWidget" :index="index" :data="data"></widget-form-item>
-          </template> -->
         </template>
             
       </draggable>
@@ -115,19 +111,6 @@ export default {
         model: this.data.list[newIndex].type + '_' + key,
         rules: []
       })
-
-      if (this.data.list[newIndex].type === 'radio' || this.data.list[newIndex].type === 'checkbox' || this.data.list[newIndex].type === 'select') {
-        this.$set(this.data.list, newIndex, {
-          ...this.data.list[newIndex],
-          options: {
-            ...this.data.list[newIndex].options,
-            options: this.data.list[newIndex].options.options.map(item => ({
-              ...item
-            }))
-          }
-        })
-      }
-
       if (this.data.list[newIndex].type === 'grid') {
         this.$set(this.data.list, newIndex, {
           ...this.data.list[newIndex],
