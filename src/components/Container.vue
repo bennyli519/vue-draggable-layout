@@ -53,9 +53,9 @@
               </li>
             </draggable>
             <!-- 字段名 -->
-            <div class="widget-cate">xx表字段</div>
+            <div class="widget-cate">数据库表字段</div>
             <draggable tag="ul" :list="labelList" 
-              v-bind="{group:{ name:'people', pull:'clone',put:false},sort:true, ghostClass: 'ghost'}"
+              v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}"
               @start="handleMoveStart"
               :move="handleMove"
               @end="handleMoveEnd"
@@ -250,7 +250,7 @@ export default {
       htmlTemplate: '',
       jsonTemplate: '',
       uploadEditor: null,
-      jsonEg: `{
+       jsonEg: `{
   "list": [
     {
       "type": "input",

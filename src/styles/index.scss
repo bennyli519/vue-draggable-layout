@@ -143,8 +143,8 @@ $primary-background-color: #ecf5ff;
 
   .widget-form-list{
     height: 100%;
-    //padding-bottom: 150px;
-    min-height: 800px;
+    padding-bottom: 150px;
+    min-height: 300px;
     .widget-view{
       padding: 5px 10px 18px;
       margin: 0;
@@ -209,6 +209,12 @@ $primary-background-color: #ecf5ff;
   }
 
   .widget-grid-container{
+    .panel-style{
+      border: 1px dashed rgb(153, 153, 153);
+      border-radius: 4px 4px 4px 4px;
+      margin: 15px 0;
+      padding: 20px;
+    }
     &.ghost{
       &::after{
         background: #fff;

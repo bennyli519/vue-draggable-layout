@@ -3,6 +3,19 @@
 
 export const basicComponents = [
   {
+    type: 'title',
+    name: '标题',
+    icon: 'icon-input',
+    options: {
+      width: '100%',
+      defaultValue: '',
+      required: false,
+      dataType: 'string',
+      pattern: '',
+      placeholder: ''
+    }
+  },
+  {
     type: 'input',
     name: '单行文本',
     icon: 'icon-input',
@@ -34,7 +47,7 @@ export const labelList = [
 
   {
     type: 'label',
-    name: '名称1',
+    name: '字段1',
     icon: 'icon-input',
     options: {
       width: '100%',
@@ -47,7 +60,33 @@ export const labelList = [
   },
   {
     type: 'label',
-    name: '名称2',
+    name: '字段2',
+    icon: 'icon-input',
+    options: {
+      width: '100%',
+      defaultValue: '',
+      required: false,
+      dataType: 'string',
+      pattern: '',
+      placeholder: ''
+    }
+  },
+  {
+    type: 'label',
+    name: '字段3',
+    icon: 'icon-input',
+    options: {
+      width: '100%',
+      defaultValue: '',
+      required: false,
+      dataType: 'string',
+      pattern: '',
+      placeholder: ''
+    }
+  },
+  {
+    type: 'label',
+    name: '字段4',
     icon: 'icon-input',
     options: {
       width: '100%',

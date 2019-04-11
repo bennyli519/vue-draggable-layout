@@ -1,21 +1,11 @@
 <template>
-  <!-- <el-form-item class="widget-view"
-      v-if="element && element.key" 
-      :class="{active: selectWidget.key == element.key, 'is_req': element.options.required}"
-      :label="element.name"
-      @click.native.stop="handleSelectWidget(index)"
-    > -->
   <el-form-item class="widget-view"
       v-if="element && element.key" 
       :class="{active: selectWidget.key == element.key, 'is_req': element.options.required}"
       @click.native.stop="handleSelectWidget(index)"
-    >
+    > 
+        <!-- 标签模版 -->
          <template v-if="element.type == 'label'">
-          <!-- <el-input 
-            v-model="element.options.defaultValue"
-            :style="{width: element.options.width}"
-            :placeholder="element.options.placeholder"
-          ></el-input> -->
           <div>{{element.name}}</div>
         </template>
 
@@ -37,9 +27,6 @@
           ></el-input>
         </template>
 
-        <template v-if="element.type=='blank'">
-          <div style="height: 50px;color: #999;background: #eee;line-height:50px;text-align:center;">自定义区域</div>
-        </template>
 
         <el-button title="删除" @click.stop="handleWidgetDelete(index)" class="widget-action-delete" v-if="selectWidget.key == element.key" circle plain type="danger">
           <!-- <icon name="icon-trash" style="width: 12px;height: 12px;"></icon> -->
