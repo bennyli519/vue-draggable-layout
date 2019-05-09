@@ -5,21 +5,6 @@
         <el-aside style="wdith: 250px;">
           <div class="components-list">
             <!-- 布局 -->
-            <!-- <div class="widget-cate">面板列</div>
-            <draggable tag="ul" :list="panel" 
-              v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}"
-              @start="handleMoveStart"
-              :move="handleMove"
-              @end="handleMoveEnd"
-            >
-              <li class="form-edit-widget-label data-grid" v-for="(item, index) in panel" :key="index">
-                <a>
-                  <i class="icon iconfont" :class="item.icon"></i>
-                  <span>{{item.name}}</span>
-                </a>
-              </li>
-            </draggable>-->
-            <!-- 布局 -->
             <div class="widget-cate">布局设置</div>
             <draggable
               tag="ul"
@@ -72,7 +57,7 @@
               @end="handleMoveEnd"
             >
               <li
-                class="form-edit-widget-label data-grid"
+                class="form-edit-widget-label"
                 v-for="(item, index) in labelList"
                 :key="index"
               >
@@ -88,26 +73,12 @@
           <el-header class="btn-bar" style="height: 45px;">
             <slot name="action"></slot>
             <el-button
-              v-if="upload"
-              type="text"
-              size="medium"
-              icon="el-icon-upload2"
-              @click="handleUpload"
-            >导入JSON</el-button>
-            <el-button
               v-if="preview"
               type="text"
               size="medium"
               icon="el-icon-view"
               @click="handlePreview"
             >预览</el-button>
-            <el-button
-              v-if="generateJson"
-              type="text"
-              size="medium"
-              icon="el-icon-tickets"
-              @click="handleGenerateJson"
-            >生成JSON</el-button>
             <el-button
               v-if="generateCode"
               type="text"
@@ -118,7 +89,6 @@
           </el-header>
           <el-main :class="{'widget-empty': widgetForm.list.length == 0}">
             <widget-form ref="widgetForm" :data="widgetForm" :select.sync="widgetFormSelect"></widget-form>
-            <!-- <generate-form insite="true":data="widgetForm" :value="widgetModels" :remote="remoteFuncs" ref="generateForm"/> -->
           </el-main>
         </el-container>
 
@@ -156,37 +126,11 @@
             v-if="previewVisible"
             :data="widgetForm"
             :value="widgetModels"
-            :remote="remoteFuncs"
             ref="generateForm"
           ></generate-form>
         </cus-dialog>
 
-        <cus-dialog
-          :visible="uploadVisible"
-          @on-close="uploadVisible = false"
-          @on-submit="handleUploadJson"
-          ref="uploadJson"
-          width="800px"
-          form
-        >
-          <el-alert type="info" title="JSON格式如下，直接复制生成的json覆盖此处代码点击确定即可"></el-alert>
-          <div id="uploadeditor" style="height: 400px;width: 100%;">{{jsonEg}}</div>
-        </cus-dialog>
-
-        <cus-dialog
-          :visible="jsonVisible"
-          @on-close="jsonVisible = false"
-          ref="jsonPreview"
-          width="800px"
-          form
-        >
-          <div id="jsoneditor" style="height: 400px;width: 100%;">{{jsonTemplate}}</div>
-
-          <template slot="action">
-            <el-button id="copybtn" data-clipboard-target=".ace_text-input">双击复制</el-button>
-          </template>
-        </cus-dialog>
-
+    
         <cus-dialog
           :visible="codeVisible"
           @on-close="codeVisible = false"
@@ -266,93 +210,19 @@ export default {
       configTab: "widget",
       widgetFormSelect: null,
       previewVisible: false,
-      jsonVisible: false,
       codeVisible: false,
-      uploadVisible: false,
-      remoteFuncs: {
-        func_test(resolve) {
-          setTimeout(() => {
-            const options = [
-              { id: "1", name: "1111" },
-              { id: "2", name: "2222" },
-              { id: "3", name: "3333" }
-            ];
-
-            resolve(options);
-          }, 2000);
-        },
-        funcGetToken(resolve) {
-          request
-            .get("http://tools-server.xiaoyaoji.cn/api/uptoken")
-            .then(res => {
-              resolve(res.uptoken);
-            });
-        },
-        upload_callback(response, file, fileList) {
-          console.log("callback", response, file, fileList);
-        }
-      },
       widgetModels: {},
       blank: "",
       htmlTemplate: "",
       jsonTemplate: "",
       uploadEditor: null,
-      jsonEg: `{
-  "list": [
-    {
-      "type": "input",
-      "name": "单行文本",
-      "icon": "icon-input",
-      "options": {
-        "width": "100%",
-        "defaultValue": "",
-        "required": false,
-        "dataType": "string",
-        "pattern": "",
-        "placeholder": "",
-        "remoteFunc": "func_1540908864000_94322"
-      },
-      "key": "1540908864000_94322",
-      "model": "input_1540908864000_94322",
-      "rules": [
-        {
-          "type": "string",
-          "message": "单行文本格式不正确"
-        }
-      ]
-    },
-    {
-      "type": "textarea",
-      "name": "多行文本",
-      "icon": "icon-diy-com-textarea",
-      "options": {
-        "width": "100%",
-        "defaultValue": "",
-        "required": false,
-        "pattern": "",
-        "placeholder": "",
-        "remoteFunc": "func_1540908876000_19435"
-      },
-      "key": "1540908876000_19435",
-      "model": "textarea_1540908876000_19435",
-      "rules": []
-    }
-  ],
-  "config": {
-    "labelWidth": 100,
-    "labelPosition": "top",
-    "size": "small"
-  }
-}`
+
     };
   },
   mounted() {
-    console.log(this.labelList);
+ 
   },
   methods: {
-    handleGoGithub() {
-      window.location.href = "https://github.com/GavinZhuLei/vue-form-making";
-    },
     handleConfigSelect(value) {
       this.configTab = value;
     },
@@ -361,13 +231,11 @@ export default {
     },
     handleMoveStart({ oldIndex }) {
       console.log("开始拖动", oldIndex);
-      // console.log('开始拖动', oldIndex, this.basicComponents)
     },
     handleMove() {
       return true;
     },
     handlePreview() {
-      console.log(this.widgetForm);
       this.previewVisible = true;
     },
     handleTest() {
@@ -381,17 +249,7 @@ export default {
           this.$refs.widgetPreview.end();
         });
     },
-    handleGenerateJson() {
-      this.jsonVisible = true;
-      this.jsonTemplate = this.widgetForm;
-      console.log(JSON.stringify(this.widgetForm));
-      this.$nextTick(() => {
-        const editor = ace.edit("jsoneditor");
-        editor.session.setMode("ace/mode/json");
 
-        const btnCopy = new Clipboard("#copybtn");
-      });
-    },
     handleGenerateCode() {
       this.codeVisible = true;
       this.htmlTemplate = generateCode(JSON.stringify(this.widgetForm));
@@ -400,45 +258,12 @@ export default {
         editor.session.setMode("ace/mode/html");
       });
     },
-    handleUpload() {
-      this.uploadVisible = true;
-      this.$nextTick(() => {
-        this.uploadEditor = ace.edit("uploadeditor");
-        this.uploadEditor.session.setMode("ace/mode/json");
-      });
-    },
-    handleUploadJson() {
-      try {
-        this.setJSON(JSON.parse(this.uploadEditor.getValue()));
-        this.uploadVisible = false;
-      } catch (e) {
-        this.$message.error(e.message);
-        this.$refs.uploadJson.end();
-      }
-    },
-    getJSON() {
-      return this.widgetForm;
-    },
-    getHtml() {
-      return generateCode(JSON.stringify(this.widgetForm));
-    },
-    setJSON(json) {
-      this.widgetForm = json;
-
-      if (json.list.length > 0) {
-        this.widgetFormSelect = json.list[0];
-      }
-    },
-    handleInput(val) {
-      console.log(val);
-      this.blank = val;
-    }
   },
   watch: {
     widgetForm: {
       deep: true,
       handler: function(val) {
-        console.log(this.$refs.widgetForm);
+        console.log(val)
       }
     }
   }

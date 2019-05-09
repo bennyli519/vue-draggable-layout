@@ -1,8 +1,11 @@
 <template>
+  <div>
+  <div v-if="element.type == 'title'">{{element.name}}</div>
   <el-form-item
     class="widget-view"
     v-if="element && element.key"
     :class="{active: selectWidget.key == element.key, 'is_req': element.options.required}"
+     @click.native.stop="handleSelectWidget(index)"
   >
     <!-- 标签模版 -->
     <template v-if="element.type == 'label'">
@@ -56,6 +59,7 @@
       </el-button>
     </div>
   </el-form-item>
+  </div>
 </template>
 
 <script>

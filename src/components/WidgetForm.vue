@@ -8,7 +8,7 @@
       <draggable
         class="widget-form-container"
         v-model="data.list"
-        v-bind="{group:'people', ghostClass: 'ghost'}"
+        v-bind="{group:'people',sort:false,ghostClass: 'ghost'}"
         @end="handleMoveEnd"
         @add="handleWidgetAdd"
       >
@@ -39,13 +39,10 @@
                     :list="col.list"
                     v-model="col.list"
                     filter="widget-grid-container"
-                    v-bind="{group:'people',sort:false, ghostClass: 'ghost'}"
+                    v-bind="{group:'people',ghostClass: 'ghost'}"
                     @end="handleMoveEnd"
                     @add="handleWidgetColAdd($event, element, colIndex)"
                   >
-                    <div v-for="(el, i) in col.list" v-if="el.type == 'title'" :key="i">
-                      <h4>{{el.name}}</h4>
-                    </div>
                     <widget-form-item
                       v-for="(el, i) in col.list"
                       :key="el.key"
@@ -106,14 +103,13 @@ export default {
   },
   methods: {
     handleMoveEnd({ newIndex, oldIndex }) {
-      console.log("Move结束", newIndex, oldIndex);
+      console.log("Move结束 rally", newIndex, oldIndex);
     },
     handleSelectWidget(index) {
       this.selectWidget = this.data.list[index];
     },
     handleWidgetAdd(evt) {
       console.log("add", evt);
-      console.log("end", evt);
       const newIndex = evt.newIndex;
       const to = evt.to;
 
@@ -140,28 +136,29 @@ export default {
 
       this.selectWidget = this.data.list[newIndex];
     },
+
+    //列添加内容
     handleWidgetColAdd($event, row, colIndex) {
       console.log("列添加内容:", $event, row, colIndex);
       const newIndex = $event.newIndex;
       const oldIndex = $event.oldIndex;
       const item = $event.item;
 
-      // 防止布局元素的嵌套拖拽
-      // if (item.className.indexOf("data-grid") >= 0) {
-      //   // 如果是列表中拖拽的元素需要还原到原来位置
-      //   item.tagName === "DIV" &&
-      //     this.data.list.splice(
-      //       oldIndex,
-      //       0,
-      //       row.columns[colIndex].list[newIndex]
-      //     );
+      console.log(item.className.indexOf("data-grid") >= 0)
+      //防止布局元素的嵌套拖拽
+      if (item.className.indexOf("data-grid") >= 0) {
+        // 如果是列表中拖拽的元素需要还原到原来位置
+        item.tagName === "DIV" &&
+          row.columns[colIndex].list.splice(
+            oldIndex,
+            0,
+            row.columns[colIndex].list[newIndex]
+          );
 
-      //   row.columns[colIndex].list.splice(newIndex, 1);
+        row.columns[colIndex].list.splice(newIndex, 1);
 
-      //   return false;
-      // }
-
-      console.log("来自：", item);
+        return false;
+      }
 
       const key =
         Date.parse(new Date()) + "_" + Math.ceil(Math.random() * 99999);
@@ -170,11 +167,10 @@ export default {
         ...row.columns[colIndex].list[newIndex],
         options: {
           ...row.columns[colIndex].list[newIndex].options,
-          remoteFunc: "func_" + key
         },
         key,
         // 绑定键值
-        model: row.columns[colIndex].list[newIndex].type + "_" + key,
+      //  model: row.columns[colIndex].list[newIndex].type + "_" + key,
         rules: []
       });
 
