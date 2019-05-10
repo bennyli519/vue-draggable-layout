@@ -1,81 +1,4 @@
-function findRemoteFunc (list, funcList, tokenFuncList, blankList) {
-  for (let i = 0; i < list.length; i++) {
-    if (list[i].type == 'grid') {
-      list[i].columns.forEach(item => {
-        findRemoteFunc(item.list, funcList, tokenFuncList, blankList)
-      })
-    } else {
-      if (list[i].type == 'blank') {
-        if (list[i].model) {
-          blankList.push({
-            name: list[i].model,
-            label: list[i].name
-          })
-        }
-      } else if (list[i].type == 'imgupload') {
-        if (list[i].options.tokenFunc) {
-          tokenFuncList.push({
-            func: list[i].options.tokenFunc,
-            label: list[i].name,
-            model: list[i].model
-          })
-        }
-      } else {
-        if (list[i].options.remote && list[i].options.remoteFunc) {
-          funcList.push({
-            func: list[i].options.remoteFunc,
-            label: list[i].name,
-            model: list[i].model
-          })
-        }
-      }
-    }
-  }
-}
-
 export default function (data) {
-
-  const funcList = []
-
-  const tokenFuncList = []
-
-  const blankList = []
-
-  findRemoteFunc(JSON.parse(data).list, funcList, tokenFuncList, blankList)
-
-  let funcTemplate = ''
-
-  let blankTemplate = ''
-
-  for(let i = 0; i < funcList.length; i++) {
-    funcTemplate += `
-            ${funcList[i].func} (resolve) {
-              // ${funcList[i].label} ${funcList[i].model}
-              // 获取到远端数据后执行回调函数
-              // resolve(data)
-            },
-    `
-  }
-
-  for(let i = 0; i < tokenFuncList.length; i++) {
-    funcTemplate += `
-            ${tokenFuncList[i].func} (resolve) {
-              // ${tokenFuncList[i].label} ${tokenFuncList[i].model}
-              // 获取到token数据后执行回调函数
-              // resolve(token)
-            },
-    `
-  }
-
-  for (let i = 0; i < blankList.length; i++) {
-    blankTemplate += `
-        <template slot="${blankList[i].name}" slot-scope="scope">
-          <!-- ${blankList[i].label} -->
-          <!-- 通过 v-model="scope.model.${blankList[i].name}" 绑定数据 -->
-        </template>
-    `
-  }
-
   return `<!DOCTYPE html>
   <html>
   <head>
@@ -85,8 +8,8 @@ export default function (data) {
   </head>
   <body>
     <div id="app">
-      <fm-generate-form :data="jsonData" :remote="remoteFuncs" :value="editData" ref="generateForm">
-        ${blankTemplate}
+      <fm-generate-form :data="jsonData"  :value="editData" ref="generateForm">
+      
       </fm-generate-form>
       <el-button type="primary" @click="handleSubmit">提交</el-button>
     </div>
@@ -99,9 +22,6 @@ export default function (data) {
         data: {
           jsonData: ${data},
           editData: {},
-          remoteFuncs: {
-            ${funcTemplate}
-          }
         },
         methods: {
           handleSubmit () {

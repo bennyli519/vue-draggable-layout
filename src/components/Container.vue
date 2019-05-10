@@ -239,20 +239,23 @@ export default {
       this.previewVisible = true;
     },
     handleTest() {
-      this.$refs.generateForm
-        .getData()
-        .then(data => {
-          this.$alert(data, "").catch(e => {});
-          this.$refs.widgetPreview.end();
-        })
-        .catch(e => {
-          this.$refs.widgetPreview.end();
-        });
+      this.$alert('提交了～～')
+      this.$refs.widgetPreview.end();
+      // this.$refs.generateForm
+      //   .getData()
+      //   .then(data => {
+      //     this.$alert(data, "").catch(e => {});
+      //     this.$refs.widgetPreview.end();
+      //   })
+      //   .catch(e => {
+      //     this.$refs.widgetPreview.end();
+      //   });
     },
 
     handleGenerateCode() {
       this.codeVisible = true;
       this.htmlTemplate = generateCode(JSON.stringify(this.widgetForm));
+      console.log(this.htmlTemplate)
       this.$nextTick(() => {
         const editor = ace.edit("codeeditor");
         editor.session.setMode("ace/mode/html");
