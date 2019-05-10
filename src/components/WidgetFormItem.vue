@@ -1,9 +1,43 @@
 <template>
   <div>
-  <div v-if="element.type == 'title'">{{element.name}}</div>
+    <!-- 列标题-->
+    <div 
+      class="widget-view"
+      v-if="element.type == 'title'"
+      :class="{active: selectWidget.key == element.key, 'is_req': element.options.required}"
+      @click.stop="handleSelectWidget(index)"
+    >
+      <div>{{element.name}}</div>
+      <div class="btn-group">
+            <el-button
+              title="删除"
+              @click.stop="handleWidgetDelete(index)"
+              class="widget-action-delete"
+              v-if="selectWidget.key == element.key"
+              circle
+              plain
+              type="danger"
+            >
+              <!-- <icon name="icon-trash" style="width: 12px;height: 12px;"></icon> -->
+              <i class="iconfont icon-trash"></i>
+            </el-button>
+            <el-button
+              title="复制"
+              @click.stop="handleWidgetClone(index)"
+              class="widget-action-clone"
+              v-if="selectWidget.key == element.key"
+              circle
+              plain
+              type="primary"
+            >
+              <!-- <icon name="icon-icon_clone" style="width: 12px;height: 12px;"></icon> -->
+              <i class="iconfont icon-icon_clone"></i>
+            </el-button>
+      </div>
+  </div>
   <el-form-item
     class="widget-view"
-    v-if="element && element.key"
+    v-else
     :class="{active: selectWidget.key == element.key, 'is_req': element.options.required}"
      @click.native.stop="handleSelectWidget(index)"
   >
@@ -81,6 +115,7 @@ export default {
   },
   methods: {
     handleSelectWidget(index) {
+      console.log(this.data.list)
       this.selectWidget = this.data.list[index];
     },
     handleWidgetDelete(index) {
@@ -138,8 +173,4 @@ export default {
   }
 };
 </script>
-<style lang="scss" scoped>
-.btn-group {
-  height: 30px;
-}
-</style>
+

@@ -227,7 +227,7 @@ export default {
       this.configTab = value;
     },
     handleMoveEnd(evt) {
-      console.log("拖动结束", evt);
+     // console.log("拖动结束", evt);
     },
     handleMoveStart({ oldIndex }) {
       console.log("开始拖动", oldIndex);
@@ -263,7 +263,7 @@ export default {
     widgetForm: {
       deep: true,
       handler: function(val) {
-        console.log(val)
+       // console.log(val)
       }
     }
   }

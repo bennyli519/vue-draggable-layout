@@ -8,7 +8,7 @@
       <draggable
         class="widget-form-container"
         v-model="data.list"
-        v-bind="{group:'people',sort:false,ghostClass: 'ghost'}"
+        v-bind="{group:'people',ghostClass: 'ghost'}"
         @end="handleMoveEnd"
         @add="handleWidgetAdd"
       >
@@ -33,10 +33,10 @@
                   v-for="(col, colIndex) in element.columns"
                   :key="colIndex"
                   :span="col.span ? col.span : 0"
+                 
                 >
                   <draggable
-                    class="panel-style"
-                    :list="col.list"
+                    class="panel-style"              
                     v-model="col.list"
                     filter="widget-grid-container"
                     v-bind="{group:'people',ghostClass: 'ghost'}"
@@ -105,17 +105,16 @@ export default {
     handleMoveEnd({ newIndex, oldIndex }) {
       console.log("Move结束 rally", newIndex, oldIndex);
     },
+    //选择行
     handleSelectWidget(index) {
       this.selectWidget = this.data.list[index];
     },
+    
+    //添加布局
     handleWidgetAdd(evt) {
-      console.log("add", evt);
       const newIndex = evt.newIndex;
-      const to = evt.to;
-
       //为拖拽到容器的元素添加唯一 key
-      const key =
-        Date.parse(new Date()) + "_" + Math.ceil(Math.random() * 99999);
+      const key =Date.parse(new Date()) + "_" + Math.ceil(Math.random() * 99999);
       this.$set(this.data.list, newIndex, {
         ...this.data.list[newIndex],
         options: {
@@ -126,7 +125,9 @@ export default {
         // 绑定键值
         model: this.data.list[newIndex].type + "_" + key,
         rules: []
-      });
+      }); 
+
+      //防止数据重复
       if (this.data.list[newIndex].type === "grid") {
         this.$set(this.data.list, newIndex, {
           ...this.data.list[newIndex],
@@ -176,6 +177,7 @@ export default {
 
       this.selectWidget = row.columns[colIndex].list[newIndex];
     },
+    
     handleWidgetDelete(index) {
       if (this.data.list.length - 1 === index) {
         if (index === 0) {
