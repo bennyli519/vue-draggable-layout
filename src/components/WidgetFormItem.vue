@@ -7,7 +7,7 @@
       :class="{active: selectWidget.key == element.key, 'is_req': element.options.required}"
       @click.stop="handleSelectWidget(index)"
     >
-      <div>{{element.name}}</div>
+      <h4>{{element.name}}</h4>
       <div class="btn-group">
             <el-button
               title="删除"

@@ -33,10 +33,9 @@
                   v-for="(col, colIndex) in element.columns"
                   :key="colIndex"
                   :span="col.span ? col.span : 0"
-                 
                 >
                   <draggable
-                    class="panel-style"              
+                    class="panel-style"
                     v-model="col.list"
                     filter="widget-grid-container"
                     v-bind="{group:'people',ghostClass: 'ghost'}"
@@ -57,9 +56,8 @@
               </el-row>
               <el-button
                 title="删除"
-                style="bottom: -20px;"
                 @click.stop="handleWidgetDelete(index)"
-                class="widget-action-delete"
+                class="widget-action-delete btn-style"
                 v-if="selectWidget.key == element.key"
                 circle
                 plain
@@ -75,6 +73,14 @@
     </el-form>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.btn-style {
+  position: absolute;
+  bottom: -20px;
+  right: 0;
+}
+</style>
 
 <script>
 import Draggable from "vuedraggable";
@@ -109,12 +115,13 @@ export default {
     handleSelectWidget(index) {
       this.selectWidget = this.data.list[index];
     },
-    
+
     //添加布局
     handleWidgetAdd(evt) {
       const newIndex = evt.newIndex;
       //为拖拽到容器的元素添加唯一 key
-      const key =Date.parse(new Date()) + "_" + Math.ceil(Math.random() * 99999);
+      const key =
+        Date.parse(new Date()) + "_" + Math.ceil(Math.random() * 99999);
       this.$set(this.data.list, newIndex, {
         ...this.data.list[newIndex],
         options: {
@@ -125,7 +132,7 @@ export default {
         // 绑定键值
         model: this.data.list[newIndex].type + "_" + key,
         rules: []
-      }); 
+      });
 
       //防止数据重复
       if (this.data.list[newIndex].type === "grid") {
@@ -140,7 +147,6 @@ export default {
 
     //列添加内容
     handleWidgetColAdd($event, row, colIndex) {
-
       const newIndex = $event.newIndex;
       const oldIndex = $event.oldIndex;
       const item = $event.item;
@@ -166,7 +172,7 @@ export default {
       this.$set(row.columns[colIndex].list, newIndex, {
         ...row.columns[colIndex].list[newIndex],
         options: {
-          ...row.columns[colIndex].list[newIndex].options,
+          ...row.columns[colIndex].list[newIndex].options
         },
         key,
         // 绑定键值
@@ -176,7 +182,7 @@ export default {
 
       this.selectWidget = row.columns[colIndex].list[newIndex];
     },
-    
+
     handleWidgetDelete(index) {
       if (this.data.list.length - 1 === index) {
         if (index === 0) {
