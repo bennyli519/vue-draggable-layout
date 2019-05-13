@@ -20,6 +20,7 @@
               :key="element.key"
               style="position: relative;"
             >
+              <h4>{{element.title}}</h4>
               <el-row
                 class="widget-grid"
                 type="flex"

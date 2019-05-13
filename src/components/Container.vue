@@ -73,14 +73,13 @@
           <el-header class="btn-bar" style="height: 45px;">
             <slot name="action"></slot>
             <el-button
-              v-if="preview"
               type="text"
               size="medium"
               icon="el-icon-view"
               @click="handlePreview"
-            >预览</el-button>
+            >{{!previewVisible?'预览':'取消预览'}}</el-button>
             <el-button
-              v-if="generateCode"
+              v-if="previewVisible"
               type="text"
               size="medium"
               icon="el-icon-document"
@@ -88,7 +87,14 @@
             >生成代码</el-button>
           </el-header>
           <el-main :class="{'widget-empty': widgetForm.list.length == 0}">
-            <widget-form ref="widgetForm" :data="widgetForm" :select.sync="widgetFormSelect"></widget-form>
+            <widget-form v-if="!previewVisible" ref="widgetForm" :data="widgetForm" :select.sync="widgetFormSelect"></widget-form>
+             <generate-form
+            insite="true"
+            v-else
+            :data="widgetForm"
+            :value="widgetModels"
+            ref="generateForm"
+          ></generate-form>
           </el-main>
         </el-container>
 
@@ -112,7 +118,7 @@
             </el-main>
           </el-container>
         </el-aside>
-
+<!-- 
         <cus-dialog
           :visible="previewVisible"
           @on-close="previewVisible = false"
@@ -128,9 +134,7 @@
             :value="widgetModels"
             ref="generateForm"
           ></generate-form>
-        </cus-dialog>
-
-    
+        </cus-dialog> -->
         <cus-dialog
           :visible="codeVisible"
           @on-close="codeVisible = false"
@@ -236,10 +240,11 @@ export default {
       return true;
     },
     handlePreview() {
-      this.previewVisible = true;
+      this.previewVisible = !this.previewVisible;
     },
     handleTest() {
       this.$alert('提交了～～')
+
       this.$refs.widgetPreview.end();
       // this.$refs.generateForm
       //   .getData()
@@ -254,11 +259,14 @@ export default {
 
     handleGenerateCode() {
       this.codeVisible = true;
-      this.htmlTemplate = generateCode(JSON.stringify(this.widgetForm));
+      this.htmlTemplate = this.$refs.generateForm.$el.innerHTML
+      console.log(this.$refs.generateForm)
       console.log(this.htmlTemplate)
       this.$nextTick(() => {
         const editor = ace.edit("codeeditor");
         editor.session.setMode("ace/mode/html");
+        editor.setOption("wrap", "free")
+        
       });
     },
   },

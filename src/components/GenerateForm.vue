@@ -10,7 +10,12 @@
     >
       <template v-for="item in data.list">
         <template v-if="item.type == 'grid'">
+          <div v-if="item.title">
+            <h4>{{item.title}}</h4>
+          </div>
+          <div v-else></div>
           <el-row
+             class="row-style"
             :key="item.key"
             type="flex"
             :gutter="item.options.gutter ? item.options.gutter : 0"
@@ -158,5 +163,14 @@ export default {
 </script>
 
 <style lang="scss">
-// @import '../styles/cover.scss';
+  .row-style{
+    padding:10px;
+    border:1px dashed #666;
+    border-radius: 4px;
+    .col-style{
+      padding:10px;
+      border:1px dashed #666;
+      border-radius: 4px;
+    }
+  }
 </style>

@@ -120,6 +120,7 @@ export const layoutComponents = [
   {
     type: 'grid',
     name: '一整行(24)',
+    title:'大标题',
     icon: 'icon-grid-',
     columns: [
       {
@@ -136,6 +137,7 @@ export const layoutComponents = [
   {
     type: 'grid',
     name: '一行2列(12:12)',
+    title:'大标题',
     icon: 'icon-grid-',
     columns: [
       {
@@ -156,6 +158,7 @@ export const layoutComponents = [
   {
     type: 'grid',
     name: '一行3列(8:8:8)',
+    title:'大标题',
     icon: 'icon-grid-',
     columns: [
       {
@@ -178,8 +181,9 @@ export const layoutComponents = [
     }
   },
   {
-    type: 'grid',
     name: '一行4列(6:6:6:6)',
+    type: 'grid',
+    title:'大标题',
     icon: 'icon-grid-',
     columns: [
       {

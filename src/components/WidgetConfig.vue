@@ -1,9 +1,11 @@
 <template>
   <div v-if="show">
     <el-form label-position="top">
-      <el-form-item label="标题" v-if="data.type!='grid'">
-        <el-input v-model="data.name"></el-input>
+      <el-form-item label="标题" >
+        <el-input v-if="data.type!='grid'" v-model="data.name"></el-input>
+         <el-input v-else v-model="data.title"></el-input>
       </el-form-item>
+      
       <el-form-item label="宽度" v-if="Object.keys(data.options).indexOf('width')>=0">
         <el-input v-model="data.options.width"></el-input>
       </el-form-item>
