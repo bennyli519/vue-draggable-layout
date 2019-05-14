@@ -156,15 +156,12 @@ import FormConfig from "./FormConfig";
 import WidgetForm from "./WidgetForm";
 import CusDialog from "./CusDialog";
 import GenerateForm from "./GenerateForm";
-import Clipboard from "clipboard";
 import {
   basicComponents,
   labelList,
   layoutComponents,
   panel
 } from "./componentsConfig.js";
-import { loadJs, loadCss } from "../util/index.js";
-import request from "../util/request.js";
 import generateCode from "./generateCode.js";
 
 export default {
@@ -223,7 +220,7 @@ export default {
       this.$alert('提交了～～')
       this.$refs.widgetPreview.end();
     }, 
-    
+
     handleGenerateCode() {
       this.codeVisible = true;
       this.htmlTemplate = HTMLFormat(this.$refs.generateForm.$el.innerHTML)
