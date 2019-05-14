@@ -64,7 +64,6 @@
                 plain
                 type="danger"
               >
-                <!-- <icon name="icon-trash" style="width: 12px;height: 12px;"></icon> -->
                 <i class="iconfont icon-trash"></i>
               </el-button>
             </div>
@@ -120,6 +119,7 @@ export default {
     //添加布局
     handleWidgetAdd(evt) {
       const newIndex = evt.newIndex;
+      const item = evt.item;
       //为拖拽到容器的元素添加唯一 key
       const key =
         Date.parse(new Date()) + "_" + Math.ceil(Math.random() * 99999);
@@ -143,6 +143,12 @@ export default {
         });
       }
 
+      //保证字段等元素在布局容器内布局
+      if (item.className.indexOf("data-grid") < 0) {
+        alert('字段只能放容器里面哦～')
+        this.data.list.splice(newIndex, 1);
+        return false;
+      }
       this.selectWidget = this.data.list[newIndex];
     },
 

@@ -18,7 +18,6 @@
               plain
               type="danger"
             >
-              <!-- <icon name="icon-trash" style="width: 12px;height: 12px;"></icon> -->
               <i class="iconfont icon-trash"></i>
             </el-button>
             <el-button
@@ -30,7 +29,6 @@
               plain
               type="primary"
             >
-              <!-- <icon name="icon-icon_clone" style="width: 12px;height: 12px;"></icon> -->
               <i class="iconfont icon-icon_clone"></i>
             </el-button>
       </div>
@@ -47,11 +45,6 @@
     </template>
 
     <template v-if="element.type == 'input'">
-      <!-- <el-input 
-            v-model="element.options.defaultValue"
-            :style="{width: element.options.width}"
-            :placeholder="element.options.placeholder"
-      ></el-input>-->
       <div>{{element.name}}</div>
     </template>
 
@@ -76,7 +69,6 @@
         plain
         type="danger"
       >
-        <!-- <icon name="icon-trash" style="width: 12px;height: 12px;"></icon> -->
         <i class="iconfont icon-trash"></i>
       </el-button>
       <el-button
@@ -88,7 +80,6 @@
         plain
         type="primary"
       >
-        <!-- <icon name="icon-icon_clone" style="width: 12px;height: 12px;"></icon> -->
         <i class="iconfont icon-icon_clone"></i>
       </el-button>
     </div>

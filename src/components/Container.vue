@@ -79,7 +79,6 @@
               @click="handlePreview"
             >{{!previewVisible?'预览':'取消预览'}}</el-button>
             <el-button
-              v-if="previewVisible"
               type="text"
               size="medium"
               icon="el-icon-document"
@@ -87,14 +86,14 @@
             >生成代码</el-button>
           </el-header>
           <el-main :class="{'widget-empty': widgetForm.list.length == 0}">
-            <widget-form v-if="!previewVisible" ref="widgetForm" :data="widgetForm" :select.sync="widgetFormSelect"></widget-form>
+            <widget-form v-if="!previewVisible" ref="widgetForm"  style="z-index:20;background:#fff;" :data="widgetForm" :select.sync="widgetFormSelect"></widget-form>
              <generate-form
-            insite="true"
-            v-else
-            :data="widgetForm"
-            :value="widgetModels"
-            ref="generateForm"
-          ></generate-form>
+              style="z-index:10"
+              insite="true"
+              :data="widgetForm"
+              :value="widgetModels"
+              ref="generateForm"
+            ></generate-form>
           </el-main>
         </el-container>
 
@@ -147,7 +146,6 @@
         </cus-dialog>
       </el-container>
     </el-main>
-    <!-- <el-footer height="30px">Forked by <a target="_blank" href="#"></a></el-footer> -->
   </el-container>
 </template>
 
@@ -179,24 +177,6 @@ export default {
     CusDialog,
     GenerateForm
   },
-  props: {
-    preview: {
-      type: Boolean,
-      default: false
-    },
-    generateCode: {
-      type: Boolean,
-      default: false
-    },
-    generateJson: {
-      type: Boolean,
-      default: false
-    },
-    upload: {
-      type: Boolean,
-      default: false
-    }
-  },
   data() {
     return {
       basicComponents,
@@ -216,10 +196,7 @@ export default {
       previewVisible: false,
       codeVisible: false,
       widgetModels: {},
-      blank: "",
       htmlTemplate: "",
-      jsonTemplate: "",
-      uploadEditor: null,
 
     };
   },
@@ -231,7 +208,7 @@ export default {
       this.configTab = value;
     },
     handleMoveEnd(evt) {
-     // console.log("拖动结束", evt);
+     console.log("拖动结束", evt);
     },
     handleMoveStart({ oldIndex }) {
       console.log("开始拖动", oldIndex);
@@ -244,22 +221,13 @@ export default {
     },
     handleTest() {
       this.$alert('提交了～～')
-
       this.$refs.widgetPreview.end();
-      // this.$refs.generateForm
-      //   .getData()
-      //   .then(data => {
-      //     this.$alert(data, "").catch(e => {});
-      //     this.$refs.widgetPreview.end();
-      //   })
-      //   .catch(e => {
-      //     this.$refs.widgetPreview.end();
-      //   });
-    },
-
+    }, 
+    
     handleGenerateCode() {
       this.codeVisible = true;
       this.htmlTemplate = HTMLFormat(this.$refs.generateForm.$el.innerHTML)
+      console.log(this.htmlTemplate)
       this.$nextTick(() => {
         const editor = ace.edit("codeeditor");
         editor.session.setMode("ace/mode/html");
@@ -687,4 +655,5 @@ var HTMLFormat = (function() {
   background: url("../assets/form_empty.png") no-repeat;
   background-position: 50%;
 }
+
 </style>

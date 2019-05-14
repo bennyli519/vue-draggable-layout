@@ -62,7 +62,6 @@
 
 <script>
 import GenetateFormItem from "./GenerateFormItem";
-import { loadJs } from "../util/index.js";
 
 export default {
   name: "fm-generate-form",
