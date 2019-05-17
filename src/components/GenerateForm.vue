@@ -15,14 +15,29 @@
           </div>
           <div v-else></div>
           <el-row
-             class="row-style"
-            :key="item.key"
             type="flex"
+            v-if="item.options"
+            :class="item.options.border.isShow?'row-style':''"
+            :key="item.key"
             :gutter="item.options.gutter ? item.options.gutter : 0"
             :justify="item.options.justify"
             :align="item.options.align"
+            :style="{
+              borderWidth:(item.options.border.width ? `${item.options.border.width}px`:'1px'),
+              borderColor:item.options.border.color 
+            }"
           >
-            <el-col v-for="(col, colIndex) in item.columns" :key="colIndex" :span="col.span">
+            <el-col
+              v-for="(col, colIndex) in item.columns" 
+              v-if="col.options"
+              :class="col.options.border.isShow?'col-style':''"
+              :key="colIndex" 
+              :span="col.span" 
+              :style="{
+                borderWidth:(col.options.border.width ? `${col.options.border.width}px`:'1px'),
+                borderColor:col.options.border.color 
+              }"
+            >
               <template v-for="citem in col.list">
                 <div v-if="citem.type == 'title'">
                   <h4>{{citem.name}} {{citem.type}}</h4>
@@ -84,7 +99,7 @@ export default {
     generateModle(genList) {
       for (let i = 0; i < genList.length; i++) {
         if (genList[i].type === "grid") {
-          genList[i].columns.forEach(item => {
+          genList[i].columns.forEach(item => { 
             this.generateModle(item.list);
           });
         } else {
@@ -164,12 +179,12 @@ export default {
 <style lang="scss">
   .row-style{
     padding:10px;
-    border:1px dashed #666;
+    border:1px solid #666;
     border-radius: 4px;
-    .col-style{
-      padding:10px;
-      border:1px dashed #666;
-      border-radius: 4px;
-    }
+  }
+  .col-style{
+    padding:10px;
+    border:1px solid #666;
+    border-radius: 4px;
   }
 </style>

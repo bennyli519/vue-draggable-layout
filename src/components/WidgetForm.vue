@@ -31,9 +31,13 @@
                 @click.native="handleSelectWidget(index)"
               >
                 <el-col
+                  style="position: relative;"
+                  v-if="col.key"
+                  :key="col.key"
                   v-for="(col, colIndex) in element.columns"
-                  :key="colIndex"
                   :span="col.span ? col.span : 0"
+                  :class="{active: selectWidget.key == col.key}"
+                  @click.native.stop="handleSelectCol(col,colIndex)"
                 >
                   <draggable
                     class="panel-style"
@@ -53,6 +57,17 @@
                       :data="col"
                     ></widget-form-item>
                   </draggable>
+                  <el-button
+                    title="删除"
+                    @click.stop="handleWidgetColDelete(index,element,colIndex)"
+                    class="btn-style"
+                    v-if="selectWidget.key == col.key"
+                    circle
+                    plain
+                    type="danger"
+                  >
+                    <i class="iconfont icon-trash"></i>
+              </el-button>
                 </el-col>
               </el-row>
               <el-button
@@ -94,11 +109,17 @@ export default {
   props: ["data", "select"],
   data() {
     return {
-      selectWidget: this.select
+      selectWidget: this.select,
+      colOption:{
+        border:{
+          isShow:true,
+          width:1,
+          color:'#333',
+        } 
+       },
     };
   },
   mounted() {
-    console.log(this.data);
     document.body.ondrop = function(event) {
       let isFirefox = navigator.userAgent.toLowerCase().indexOf("firefox") > -1;
       if (isFirefox) {
@@ -109,13 +130,16 @@ export default {
   },
   methods: {
     handleMoveEnd({ newIndex, oldIndex }) {
-      console.log("Move结束 rally", newIndex, oldIndex);
     },
     //选择行
     handleSelectWidget(index) {
       this.selectWidget = this.data.list[index];
     },
-
+   //选择列
+    handleSelectCol(col,colIndex) {
+      this.selectWidget = col;
+      console.log(this.selectWidget)
+    },
     //添加布局
     handleWidgetAdd(evt) {
       const newIndex = evt.newIndex;
@@ -125,10 +149,7 @@ export default {
         Date.parse(new Date()) + "_" + Math.ceil(Math.random() * 99999);
       this.$set(this.data.list, newIndex, {
         ...this.data.list[newIndex],
-        options: {
-          ...this.data.list[newIndex].options,
-          remoteFunc: "func_" + key
-        },
+        options: JSON.parse(JSON.stringify(this.data.list[newIndex].options)),
         key,
         // 绑定键值
         model: this.data.list[newIndex].type + "_" + key,
@@ -139,10 +160,17 @@ export default {
       if (this.data.list[newIndex].type === "grid") {
         this.$set(this.data.list, newIndex, {
           ...this.data.list[newIndex],
-          columns: this.data.list[newIndex].columns.map(item => ({ ...item }))
+          columns: this.data.list[newIndex].columns.map((item,index) => (
+              { ...item,
+                key:(key + index),
+                options:JSON.parse(JSON.stringify(this.colOption))
+            
+              }
+            )
+          )
         });
       }
-
+      console.log(this.data.list)
       //保证字段等元素在布局容器内布局
       if (item.className.indexOf("data-grid") < 0) {
         alert('字段只能放容器里面哦～')
@@ -189,7 +217,26 @@ export default {
 
       this.selectWidget = row.columns[colIndex].list[newIndex];
     },
-
+    //col列删除
+    handleWidgetColDelete(index,element,colIndex){
+      //如果只有一列
+      if (element.columns.length - 1 === colIndex) {
+        if (colIndex === 0) {
+          this.selectWidget = {}; 
+          this.data.list[index] = {};
+        } else {
+          this.selectWidget = element.columns[colIndex - 1];
+        }
+      } else {
+        this.selectWidget = element.columns[colIndex + 1];
+      }
+      //移除选中的那一列col
+      this.$nextTick(() => {
+        element.columns.splice(colIndex, 1);
+      });
+      console.log(this.data.list)
+    },
+    //row行删除
     handleWidgetDelete(index) {
       if (this.data.list.length - 1 === index) {
         if (index === 0) {

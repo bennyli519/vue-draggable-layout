@@ -4,6 +4,7 @@ module.exports = {
   productionSourceMap: false,
   publicPath: './',
   configureWebpack: config => {
+    devtool: 'source-map'
     let plugins = [
       new UglifyJsPlugin({
         uglifyOptions: {

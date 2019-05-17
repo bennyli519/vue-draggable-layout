@@ -15,32 +15,7 @@ export const basicComponents = [
       placeholder: ''
     }
   },
-  // {
-  //   type: 'input',
-  //   name: '单行文本',
-  //   icon: 'icon-input',
-  //   options: {
-  //     width: '100%',
-  //     defaultValue: '',
-  //     required: false,
-  //     dataType: 'string',
-  //     pattern: '',
-  //     placeholder: ''
-  //   }
-  // },
-  // {
-  //   type: 'textarea',
-  //   name: '多行文本',
-  //   icon: 'icon-diy-com-textarea',
-  //   options: {
-  //     width: '100%',
-  //     defaultValue: '',
-  //     required: false,
-  //     disabled: false,
-  //     pattern: '',
-  //     placeholder: ''
-  //   }
-  
+
 ]
 
 export const labelList = [
@@ -125,10 +100,15 @@ export const layoutComponents = [
     columns: [
       {
         span: 24,
-        list: []
+        list: [],
       },
     ],
     options: {
+      border:{
+        isShow:true,
+        width:1,
+        color:'#333',
+      },
       gutter: 0,
       justify: 'start',
       align: 'top'
@@ -150,6 +130,11 @@ export const layoutComponents = [
       }
     ],
     options: {
+      border:{
+        isShow:true,
+        width:1,
+        color:'#333',
+      },
       gutter: 0,
       justify: 'start',
       align: 'top'
@@ -175,6 +160,11 @@ export const layoutComponents = [
       },
     ],
     options: {
+      border:{
+        isShow:true,
+        width:1,
+        color:'#333',
+      },
       gutter: 0,
       justify: 'start',
       align: 'top'
@@ -204,6 +194,11 @@ export const layoutComponents = [
       }
     ],
     options: {
+      border:{
+        isShow:true,
+        width:1,
+        color:'#333',
+      },
       gutter: 0,
       justify: 'start',
       align: 'top'
