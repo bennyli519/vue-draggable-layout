@@ -113,9 +113,9 @@ export default {
       selectWidget: this.select,
       colOption:{
         border:{
-          isShow:true,
+          isShow:false,
           width:1,
-          color:'#333',
+          color:'#eee',
         } 
        },
     };

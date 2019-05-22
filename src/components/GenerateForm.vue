@@ -30,6 +30,7 @@
           >
             <el-col
               v-for="(col, colIndex) in item.columns" 
+              v-if="col.options"
               :key="colIndex" 
               :span="col.span" 
               :style="{
@@ -145,12 +146,12 @@ export default {
   .row-style{
     margin: 0 !important;
     padding:10px;
-    border:1px solid #666;
+    border:1px solid #eee;
     border-radius: 4px;
   }
   .col-style{
     padding:10px;
-    border:1px solid #666;
+    border:1px solid #eee;
     border-radius: 4px;
   }
 </style>

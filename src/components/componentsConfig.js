@@ -107,7 +107,7 @@ export const layoutComponents = [
       border:{
         isShow:true,
         width:1,
-        color:'#333',
+        color:'#eee',
       },
       gutter: 0,
       justify: 'start',
@@ -133,7 +133,7 @@ export const layoutComponents = [
       border:{
         isShow:true,
         width:1,
-        color:'#333',
+        color:'#eee',
       },
       gutter: 0,
       justify: 'start',
@@ -163,7 +163,7 @@ export const layoutComponents = [
       border:{
         isShow:true,
         width:1,
-        color:'#333',
+        color:'#eee',
       },
       gutter: 0,
       justify: 'start',
@@ -197,7 +197,7 @@ export const layoutComponents = [
       border:{
         isShow:true,
         width:1,
-        color:'#333',
+        color:'#eee',
       },
       gutter: 0,
       justify: 'start',
