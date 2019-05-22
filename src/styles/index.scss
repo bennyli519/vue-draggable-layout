@@ -149,8 +149,9 @@ $primary-background-color: #ecf5ff;
   .panel-style {
     border: 1px dashed rgb(153, 153, 153);
     border-radius: 4px 4px 4px 4px;
-    margin: 15px 0;
-    padding: 40px;
+    padding:10px;
+    min-height: 200px;
+    // padding: 40px;
     .widget-view {
       padding: 5px 10px 5px;
       margin: 0;
@@ -205,7 +206,7 @@ $primary-background-color: #ecf5ff;
     background: #f4f6fc;
     position: relative;
     border-left: 5px solid transparent;
-    padding: 5px;
+    padding:20px 10px;
     margin: 0 !important;
 
     &.active {
@@ -303,4 +304,7 @@ $primary-background-color: #ecf5ff;
 
 .viewer-container {
   z-index: 99999 !important;
+}
+.title-style{
+  margin:10px;
 }

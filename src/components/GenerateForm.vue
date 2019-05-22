@@ -1,6 +1,7 @@
 <template>
   <div>
     <el-form
+      class="form-style"
       ref="generateForm"
       :size="data.config.size"
       :model="models"
@@ -29,8 +30,6 @@
           >
             <el-col
               v-for="(col, colIndex) in item.columns" 
-              v-if="col.options"
-              :class="col.options.border.isShow?'col-style':''"
               :key="colIndex" 
               :span="col.span" 
               :style="{
@@ -38,29 +37,26 @@
                 borderColor:col.options.border.color 
               }"
             >
-              <template v-for="citem in col.list">
-                <div v-if="citem.type == 'title'">
-                  <h4>{{citem.name}} {{citem.type}}</h4>
-                </div>
-                <genetate-form-item
-                  v-else
-                  :key="citem.key"
-                  :models.sync="models"
-                  :remote="remote"
-                  :rules="rules"
-                  :widget="citem"
-                ></genetate-form-item>
-              </template>
+              <div 
+                v-if="col.options"
+                :class="col.options.border.isShow?'col-style':''">
+                <template v-for="citem in col.list">
+                  <div v-if="citem.type == 'title'">
+                    <h4>{{citem.name}} {{citem.type}}</h4>
+                  </div>
+                  <genetate-form-item
+                    v-else
+                    :key="citem.key"
+                    :models.sync="models"
+                    :remote="remote"
+                    :rules="rules"
+                    :widget="citem"
+                  ></genetate-form-item>
+                </template>
+              </div>
             </el-col>
           </el-row>
         </template>
-
-        <!-- <template v-else-if="item.type == 'blank'">
-          <el-form-item :label="item.name" :prop="item.model" :key="item.key">
-            <slot :name="item.model" :model="models"></slot>
-          </el-form-item>
-        </template>-->
-
         <template v-else>
           <genetate-form-item
             :key="item.key"
@@ -120,43 +116,9 @@ export default {
               this.models[genList[i].model] = genList[i].options.defaultValue;
             }
           }
-          // if (this.rules[genList[i].model]) {
-          //   this.rules[genList[i].model] = [
-          //     ...this.rules[genList[i].model],
-          //     ...genList[i].rules.map(item => {
-          //       if (item.pattern) {
-          //         return { ...item, pattern: eval(item.pattern) };
-          //       } else {
-          //         return { ...item };
-          //       }
-          //     })
-          //   ];
-          // } else {
-          //   this.rules[genList[i].model] = [
-          //     ...genList[i].rules.map(item => {
-          //       if (item.pattern) {
-          //         return { ...item, pattern: eval(item.pattern) };
-          //       } else {
-          //         return { ...item };
-          //       }
-          //     })
-          //   ];
-          // }
         }
       }
     },
-    getData() {
-      return new Promise((resolve, reject) => {
-        this.$refs.generateForm.validate(valid => {
-          if (valid) {
-            resolve(this.models);
-          } else {
-            reject(new Error("表单数据校验失败").message);
-          }
-        });
-      });
-    },
-    refresh() {}
   },
   watch: {
     data: {
@@ -177,7 +139,11 @@ export default {
 </script>
 
 <style lang="scss">
+  .form-style{
+    padding:0 10px;
+  }
   .row-style{
+    margin: 0 !important;
     padding:10px;
     border:1px solid #666;
     border-radius: 4px;

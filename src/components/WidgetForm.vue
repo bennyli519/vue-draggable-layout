@@ -20,7 +20,7 @@
               :key="element.key"
               style="position: relative;"
             >
-              <h4>{{element.title}}</h4>
+              <h4 class="title-style">{{element.title}}</h4>
               <el-row
                 class="widget-grid"
                 type="flex"
@@ -37,7 +37,6 @@
                   v-for="(col, colIndex) in element.columns"
                   :span="col.span ? col.span : 0"
                   :class="{active: selectWidget.key == col.key}"
-                  @click.native.stop="handleSelectCol(col,colIndex)"
                 >
                   <draggable
                     class="panel-style"
@@ -46,6 +45,7 @@
                     v-bind="{group:'people',ghostClass: 'ghost'}"
                     @end="handleMoveEnd"
                     @add="handleWidgetColAdd($event, element, colIndex)"
+                    @click.native.stop="handleSelectCol(col,colIndex)"
                   >
                     <widget-form-item
                       v-for="(el, i) in col.list"
@@ -90,6 +90,7 @@
 </template>
 
 <style lang="scss" scoped>
+
 .btn-style {
   position: absolute;
   bottom: -20px;
