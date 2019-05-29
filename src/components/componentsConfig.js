@@ -109,7 +109,7 @@ export const layoutComponents = [
         width:1,
         color:'#eee',
       },
-      gutter: 0,
+      gutter: 20,
       justify: 'start',
       align: 'top'
     }
@@ -135,7 +135,7 @@ export const layoutComponents = [
         width:1,
         color:'#eee',
       },
-      gutter: 0,
+      gutter: 20,
       justify: 'start',
       align: 'top'
     }
@@ -165,7 +165,7 @@ export const layoutComponents = [
         width:1,
         color:'#eee',
       },
-      gutter: 0,
+      gutter: 20,
       justify: 'start',
       align: 'top'
     }
@@ -199,7 +199,7 @@ export const layoutComponents = [
         width:1,
         color:'#eee',
       },
-      gutter: 0,
+      gutter: 20,
       justify: 'start',
       align: 'top'
     }

@@ -1,8 +1,8 @@
 <template>
   <div v-if="show">
     <el-form label-position="top">
-      <el-form-item label="标题" >
-        <el-input v-if="data.type!='grid'" v-model="data.name"></el-input>
+      <el-form-item label="标题"  v-if="data.type == 'grid' || data.type=='label'||data.type=='title'">
+          <el-input v-if="data.type!='grid'" v-model="data.name"></el-input>
          <el-input v-else v-model="data.title"></el-input>
       </el-form-item>
       <el-form-item label="边框" v-if="Object.keys(data.options).indexOf('border')>=0" style="display:block">
@@ -30,9 +30,9 @@
         高度：<el-input style="width: 90px;" type="number" v-model.number="data.options.size.height"></el-input>
       </el-form-item>
       
-      <el-form-item label="占位内容" v-if="Object.keys(data.options).indexOf('placeholder')>=0 && (data.type!='time' || data.type!='date')">
+      <!-- <el-form-item label="占位内容" v-if="Object.keys(data.options).indexOf('placeholder')>=0 && (data.type!='time' || data.type!='date')">
         <el-input v-model="data.options.placeholder"></el-input>
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item label="布局方式" v-if="Object.keys(data.options).indexOf('inline')>=0">
         <el-radio-group v-model="data.options.inline">
           <el-radio-button :label="false">块级</el-radio-button>
@@ -112,7 +112,7 @@
             <el-button type="text" @click="handleAddColumn">添加列</el-button>
           </div>
         </el-form-item>
-        <el-form-item label="水平排列方式">
+        <!-- <el-form-item label="水平排列方式">
           <el-select v-model="data.options.justify">
             <el-option value="start" label="左对齐"></el-option>
             <el-option value="end" label="右对齐"></el-option>
@@ -127,7 +127,7 @@
             <el-option value="middle" label="居中"></el-option>
             <el-option value="bottom" label="底部对齐"></el-option>
           </el-select>
-        </el-form-item>
+        </el-form-item> -->
       </template>
     </el-form>
   </div>
@@ -195,14 +195,6 @@ export default {
         list: []
       })
     },
-    generateRule () {
-      this.data.rules = []
-      Object.keys(this.validator).forEach(key => {
-        if (this.validator[key]) {
-          this.data.rules.push(this.validator[key])
-        }
-      })
-    },
     handleSelectMuliple (value) {
       if (value) {
         if (this.data.options.defaultValue) {
@@ -221,54 +213,6 @@ export default {
       }
     }
   },
-  watch: {
-    'data.options.isRange': function(val) {
-      if (typeof val !== 'undefined') {
-        if (val) {
-          this.data.options.defaultValue = null
-        } else {
-          if (Object.keys(this.data.options).indexOf('defaultValue')>=0) 
-            this.data.options.defaultValue = ''
-        }
-      }
-    },
-    'data.options.required': function(val) {
-      if (val) {
-        this.validator.required = {required: true, message: `${this.data.name}必须填写`}
-      } else {
-        this.validator.required = null
-      }
 
-      this.$nextTick(() => {
-        this.generateRule()
-      })
-    },
-    'data.options.dataType': function (val) {
-      if (!this.show) {
-        return false
-      }
-      
-      if (val) {
-        this.validator.type = {type: val, message: this.data.name + '格式不正确'}
-      } else {
-        this.validator.type = null
-      }
-
-      this.generateRule()
-    },
-    'data.options.pattern': function (val) {
-      if (!this.show) {
-        return false
-      }
-
-      if (val) {
-        this.validator.pattern = {pattern: val, message: this.data.name + '格式不匹配'}
-      } else {
-        this.validator.pattern = null
-      }
-
-      this.generateRule()
-    }
-  }
 }
 </script>

@@ -72,6 +72,12 @@
         <el-container class="center-container" direction="vertical">
           <el-header class="btn-bar" style="height: 45px;">
             <slot name="action"></slot>
+              <el-button
+              type="text"
+              size="medium"
+              icon="el-icon-view"
+              @click="resetLayout"
+            >清空布局</el-button>
             <el-button
               type="text"
               size="medium"
@@ -105,11 +111,11 @@
                 :class="{active: configTab=='widget'}"
                 @click="handleConfigSelect('widget')"
               >字段属性</div>
-              <div
+              <!-- <div
                 class="config-tab"
                 :class="{active: configTab=='form'}"
                 @click="handleConfigSelect('form')"
-              >表单属性</div>
+              >表单属性</div> -->
             </el-header>
             <el-main class="config-content">
               <widget-config v-show="configTab=='widget'" :data="widgetFormSelect"></widget-config>
@@ -201,6 +207,17 @@ export default {
  
   },
   methods: {
+    resetLayout(){
+      this.widgetForm = {
+        list: [],
+        config: {
+          labelWidth: 100,
+          labelPosition: "top",
+          size: "small"
+        }
+      }
+     this.widgetFormSelect = null
+    },
     handleConfigSelect(value) {
       this.configTab = value;
     },
