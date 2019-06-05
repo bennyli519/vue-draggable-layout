@@ -1,6 +1,7 @@
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
+  baseUrl: 'vue-draggable-layout',
   productionSourceMap: false,
   publicPath: './',
   configureWebpack: config => {
