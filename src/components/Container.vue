@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Benny
  * @Date: 2019-08-25 11:12:55
- * @LastEditTime: 2019-08-25 11:36:42
+ * @LastEditTime: 2019-08-25 12:19:25
  -->
 <template>
   <el-container class="fm2-container">
@@ -81,7 +81,7 @@
               <el-button
               type="text"
               size="medium"
-              icon="el-icon-view"
+              icon="el-icon-document"
               @click="resetLayout"
             >清空布局</el-button>
             <el-button
@@ -90,6 +90,12 @@
               icon="el-icon-view"
               @click="handlePreview"
             >{{!previewVisible?'预览':'取消预览'}}</el-button>
+            <el-button
+              type="text"
+              size="medium"
+              icon="el-icon-document"
+              @click="saveLayout"
+            >保存布局</el-button>
             <el-button
               type="text"
               size="medium"
@@ -225,6 +231,10 @@ export default {
  
   },
   methods: {
+    saveLayout(){
+      this.htmlTemplate = HTMLFormat(this.$refs.generateForm.$el.innerHTML)
+      console.log(this.htmlTemplate)
+    },
     resetLayout(){
       this.widgetForm = {
         list: [],
