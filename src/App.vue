@@ -1,3 +1,9 @@
+<!--
+ * @Description: 
+ * @Author: Benny
+ * @Date: 2019-08-25 11:12:55
+ * @LastEditTime: 2019-08-25 11:58:19
+ -->
 <template>
   <div id="app">
     <div class="fm-header">
@@ -8,7 +14,7 @@
         <a href="#">workiee</a>
       </div>
     </div>
-    <div  class="fm-container"><router-view/></div>
+    <div class="fm-container"><router-view/></div>
   </div>
 </template>
 

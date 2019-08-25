@@ -1,3 +1,9 @@
+<!--
+ * @Description: 
+ * @Author: Benny
+ * @Date: 2019-08-25 11:12:55
+ * @LastEditTime: 2019-08-25 11:53:33
+ -->
 <template>
   <div v-if="show">
     <el-form label-position="top">
@@ -108,9 +114,9 @@
               
             </li>
           </draggable>
-          <div style="margin-left: 22px;">
+          <!-- <div style="margin-left: 22px;">
             <el-button type="text" @click="handleAddColumn">添加列</el-button>
-          </div>
+          </div> -->
         </el-form-item>
         <!-- <el-form-item label="水平排列方式">
           <el-select v-model="data.options.justify">

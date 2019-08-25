@@ -1,3 +1,9 @@
+/*
+ * @Description: 
+ * @Author: Benny
+ * @Date: 2019-08-25 11:12:55
+ * @LastEditTime: 2019-08-25 11:30:41
+ */
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
@@ -21,6 +27,19 @@ module.exports = {
     ]
     if (process.env.NODE_ENV !== 'development') {
       config.plugins = [...config.plugins, ...plugins]
+    }
+  },
+  devServer:{
+    proxy:{
+      '/api': {
+          target: 'http://app.workiee.com/ptExt/fzy/diy/webApi',
+          secure: true,
+          changeOrigin: true,
+          pathRewrite: {
+              '/api': ''
+          }
+      }
+
     }
   }
 }

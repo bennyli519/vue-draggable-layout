@@ -1,3 +1,9 @@
+/*
+ * @Description: 
+ * @Author: Benny
+ * @Date: 2019-08-25 11:12:55
+ * @LastEditTime: 2019-08-25 11:47:51
+ */
 
 
 
@@ -25,12 +31,11 @@ export const labelList = [
     name: '字段1',
     icon: 'icon-input',
     options: {
-      width: '100%',
-      defaultValue: '',
-      required: false,
-      dataType: 'string',
-      pattern: '',
-      placeholder: ''
+      // width: '100%',
+      // defaultValue: '',
+      // dataType: 'string',
+      // pattern: '',
+      // placeholder: ''
     }
   },
   {
@@ -39,7 +44,7 @@ export const labelList = [
     icon: 'icon-input',
     options: {
       width: '100%',
-      defaultValue: '',
+      defaultValue: 'aaa',
       required: false,
       dataType: 'string',
       pattern: '',

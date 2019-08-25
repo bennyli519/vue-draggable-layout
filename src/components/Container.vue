@@ -1,3 +1,9 @@
+<!--
+ * @Description: 
+ * @Author: Benny
+ * @Date: 2019-08-25 11:12:55
+ * @LastEditTime: 2019-08-25 11:36:42
+ -->
 <template>
   <el-container class="fm2-container">
     <el-main class="fm2-main">
@@ -156,6 +162,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import Draggable from "vuedraggable";
 import WidgetConfig from "./WidgetConfig";
 import FormConfig from "./FormConfig";
@@ -202,6 +209,17 @@ export default {
       htmlTemplate: "",
 
     };
+  },
+  created(){
+    axios.post('/api/FormFieldGet.aspx?MyType=Flow&&MyForm=systipsNew')
+    .then((res)=>{
+      if(res.status == 200){
+
+        console.log(res.data);//处理成功的函数 相当于success
+      }
+    }).catch((error)=>{
+      console.log(error)//错误处理 相当于error
+    })
   },
   mounted() {
  
