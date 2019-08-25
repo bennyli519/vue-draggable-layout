@@ -169,6 +169,7 @@
 
 <script>
 import axios from 'axios';
+import {Decrypt,Encrypt} from '../util/secret.js';
 import Draggable from "vuedraggable";
 import WidgetConfig from "./WidgetConfig";
 import FormConfig from "./FormConfig";
@@ -249,12 +250,12 @@ export default {
       this.htmlTemplate = HTMLFormat(this.$refs.generateForm.$el.innerHTML)
       console.log(this.htmlTemplate)
       console.log(encodeURI(this.htmlTemplate))
-      console.log(JSON.stringify(this.widgetForm))
+      // console.log(JSON.stringify(this.widgetForm))
       axios.post('/api/FormFieldSave.aspx',{
         MyType:'Form',
         MyForm:'MyDemoTableIntoAllForm',
-        PageContent:encodeURI(this.htmlTemplate),
-        PageJson:encodeURI(JSON.stringify(this.widgetForm))
+        PageContent:encodeURI(this.htmlTemplate).replace(/\/\%/g,'-'),
+        PageJson:encodeURI(JSON.stringify(this.widgetForm)).replace(/\/\%/g,'-')
       })
       .then((res)=>{
           console.log(res)
