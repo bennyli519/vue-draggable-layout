@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Benny
  * @Date: 2019-08-25 11:12:55
- * @LastEditTime: 2019-08-25 12:19:25
+ * @LastEditTime: 2019-08-25 13:52:28
  -->
 <template>
   <el-container class="fm2-container">
@@ -197,7 +197,7 @@ export default {
     return {
       basicComponents,
       layoutComponents,
-      labelList,
+      // labelList,
       panel,
       widgetForm: {
         list: [],
@@ -213,6 +213,7 @@ export default {
       codeVisible: false,
       widgetModels: {},
       htmlTemplate: "",
+      labelList:[]
 
     };
   },
@@ -220,8 +221,21 @@ export default {
     axios.post('/api/FormFieldGet.aspx?MyType=Flow&&MyForm=systipsNew')
     .then((res)=>{
       if(res.status == 200){
-
-        console.log(res.data);//处理成功的函数 相当于success
+        if(res.data.result == "true"){
+          res.data.detail = res.data.detail.split('|') 
+          res.data.detail.map(item=>{
+            this.labelList.push({
+                type: 'label',
+                name: item,
+                icon: 'icon-input',
+                options: {
+                  width: '100%',
+                  defaultValue: 'aaa',
+                }
+            })
+          })
+          console.log(res.data)
+        }
       }
     }).catch((error)=>{
       console.log(error)//错误处理 相当于error
@@ -234,6 +248,19 @@ export default {
     saveLayout(){
       this.htmlTemplate = HTMLFormat(this.$refs.generateForm.$el.innerHTML)
       console.log(this.htmlTemplate)
+      console.log(encodeURI(this.htmlTemplate))
+      console.log(JSON.stringify(this.widgetForm))
+      axios.post('/api/FormFieldSave.aspx',{
+        MyType:'Form',
+        MyForm:'MyDemoTableIntoAllForm',
+        PageContent:encodeURI(this.htmlTemplate),
+        PageJson:encodeURI(JSON.stringify(this.widgetForm))
+      })
+      .then((res)=>{
+          console.log(res)
+        }).catch((error)=>{
+          console.log(error)//错误处理 相当于error
+        })
     },
     resetLayout(){
       this.widgetForm = {
