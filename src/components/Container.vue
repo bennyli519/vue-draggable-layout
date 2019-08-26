@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Benny
  * @Date: 2019-08-25 11:12:55
- * @LastEditTime: 2019-08-26 11:26:59
+ * @LastEditTime: 2019-08-26 18:18:35
  -->
 <template>
 <el-container class="fm2-container">
@@ -47,7 +47,7 @@
                     <slot name="action"></slot>
                     <el-button type="text" size="medium" icon="el-icon-document" @click="resetLayout">清空布局</el-button>
                     <el-button type="text" size="medium" icon="el-icon-view" @click="handlePreview">{{!previewVisible?'预览':'取消预览'}}</el-button>
-                    <el-button type="text" size="medium" icon="el-icon-document" @click="saveLayout">保存布局</el-button>
+                    <el-button :loading="isSaveLoading" type="text" size="medium" icon="el-icon-document" @click="saveLayout">保存布局</el-button>
                     <el-button type="text" size="medium" icon="el-icon-document" @click="handleGenerateCode">生成代码</el-button>
                 </el-header>
                 <el-main :class="{'widget-empty': widgetForm.list.length == 0}">
@@ -145,60 +145,81 @@ export default {
             widgetModels: {},
             htmlTemplate: "",
             labelList: [],
-            flag: false,
-
+            param: {
+                MyType: null,
+                MyForm: null
+            },
+            isSaveLoading: false,
         };
     },
     created() {
-        console.log(api.getForm)
-        axios.post(api.getForm)
-        .then((res)=>{
-          if(res.status == 200){
-            if(res.data.result == "true"){
-              this.flag = true;
-              res.data.data = JSON.parse(decodeURI(res.data.data))
-              console.log(JSON.stringify(res.data.data))
-              this.widgetForm = res.data.data
-              res.data.detail = res.data.detail.split('|') 
-              res.data.detail.map(item=>{
-                this.labelList.push({
-                    type: 'label',
-                    name: item,
-                    icon: 'icon-input',
-                    options: {
-                      width: '100%',
-                      defaultValue: 'aaa',
-                    }
-                })
-              })
-              console.log(res.data)
-            }
-          }
-        }).catch((error)=>{
-          console.log(error)//错误处理 相当于error
-        })
+
+        this.param.MyType = api.queryString("MyType");
+        this.param.MyForm = api.queryString("MyForm")
+
+        if (this.param.MyType && this.param.MyForm) {
+            api.getForm = api.getForm + `?MyType=${this.param.MyType}&&MyForm=${this.param.MyForm}`;
+            this.getLayout();
+        }
     },
     mounted() {
 
     },
     methods: {
-        saveLayout() {
-            this.htmlTemplate = HTMLFormat(this.$refs.generateForm.$el.innerHTML)
-            console.log(this.htmlTemplate)
-            console.log(encodeURI(this.htmlTemplate))
-            // console.log(JSON.stringify(this.widgetForm))
-            axios.post(api.saveForm, {
-                    MyType: 'Flow',
-                    MyForm: 'systipsNew',
-                    PageContent: encodeURI(this.htmlTemplate).replace(/\/\%/g, '-'),
-                    PageJson: encodeURI(JSON.stringify(this.widgetForm)).replace(/\/\%/g, '-')
-                })
+        //获取布局
+        getLayout() {
+            axios.post(api.getForm)
                 .then((res) => {
-                    console.log(res)
+                    if (res.status == 200) {
+                        if (res.data.result == "true") {
+                            res.data.data = JSON.parse(decodeURI(res.data.data))
+                            this.widgetForm = res.data.data
+                            res.data.detail = res.data.detail.split('|')
+                            res.data.detail.map(item => {
+                                this.labelList.push({
+                                    type: 'label',
+                                    name: item,
+                                    icon: 'icon-input',
+                                    options: {
+                                        width: '100%',
+                                        defaultValue: 'aaa',
+                                    }
+                                })
+                            })
+                        }
+                    }
                 }).catch((error) => {
                     console.log(error) //错误处理 相当于error
                 })
         },
+        //保存布局
+        saveLayout() {
+            this.htmlTemplate = HTMLFormat(this.$refs.generateForm.$el.innerHTML)
+            this.isSaveLoading = true;
+            axios.post(api.saveForm, {
+                    ...this.param,
+                    PageContent: encodeURI(this.htmlTemplate).replace(/\/\%/g, '-'),
+                    PageJson: encodeURI(JSON.stringify(this.widgetForm)).replace(/\/\%/g, '-')
+                })
+                .then((res) => {
+                    this.isSaveLoading = false
+                    if (res.data.return_msg = "success") {
+                        this.$message({
+                            message: '保存成功',
+                            type: 'success'
+                        });
+                    } else {
+                        this.$message({
+                            message: '保存失败',
+                            type: 'success'
+                        });
+                    }
+
+                }).catch((error) => {
+                    console.log(error) //错误处理 相当于error
+                })
+        },
+        //重置布局
         resetLayout() {
             this.widgetForm = {
                 list: [],

@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Benny
  * @Date: 2019-08-26 11:20:08
- * @LastEditTime: 2019-08-26 13:32:44
+ * @LastEditTime: 2019-08-26 17:57:35
  */
 const devSiteUrl = {
     SITE: "/api",
@@ -14,6 +14,14 @@ const proSiteUrl = {
 const siteUrls = process.env.NODE_ENV !== 'production' ? devSiteUrl : proSiteUrl;
 
 export default {
-    getForm:siteUrls.SITE + '/FormFieldGet.aspx?MyType=Flow&&MyForm=systipsNew',
-    saveForm: siteUrls.SITE + '/FormFieldSave.aspx'
+    getForm:siteUrls.SITE + '/FormFieldGet.aspx',
+    saveForm: siteUrls.SITE + '/FormFieldSave.aspx',
+    queryString: function (param, isEncode) {
+        param = param.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var n = new RegExp("[\\?&]" + param + "=([^&#]*)", 'i'),
+            o = n.exec(location.search),
+            r = null;
+        return null === o ? (n = new RegExp("[\\?&]" + param + "(\\&([^&#]*)|$)", 'i'), n.test(location.search) ? !0 : void 0) : (r = o[1].replace(/\+/g, " "),
+            isEncode ? r : decodeURIComponent(r));
+    },
 }

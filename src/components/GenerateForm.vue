@@ -1,3 +1,9 @@
+<!--
+ * @Description: 
+ * @Author: Benny
+ * @Date: 2019-08-25 11:12:55
+ * @LastEditTime: 2019-08-26 18:21:19
+ -->
 <template>
   <div>
     <el-form
@@ -40,11 +46,9 @@
             >
               <div 
                 v-if="col.options"
-                :class="col.options.border.isShow?'col-style':''">
+                :class="col.options.border.isShow?'col-style':'input-container'">
                 <template v-for="citem in col.list">
-                  <div v-if="citem.type == 'title'">
-                    <h4>{{citem.name}} {{citem.type}}</h4>
-                  </div>
+                  <h4 v-if="citem.type == 'title'" class="tablefield">{{citem.name}} {{citem.type}}</h4>
                   <genetate-form-item
                     v-else
                     :key="citem.key"

@@ -1,5 +1,11 @@
+<!--
+ * @Description: 
+ * @Author: Benny
+ * @Date: 2019-08-25 11:12:55
+ * @LastEditTime: 2019-08-26 18:21:18
+ -->
 <template>
-  <el-form-item :label="widget.name" :prop="widget.model">
+  <!-- <el-form-item class="adsfasdfas" :label="widget.name+'1231'" :prop="widget.model">
     <template v-if="widget.type == 'input'">
       <el-input
         v-if="widget.options.dataType == 'number' || widget.options.dataType == 'integer' || widget.options.dataType == 'float'"
@@ -27,9 +33,16 @@
         :style="{width: widget.options.width}"
       ></el-input>
     </template>
-  </el-form-item>
+  </el-form-item> -->
+  <div class="input-wrapper">
+    <div class="tablefield">{{widget.name}}</div>
+  </div>
 </template>
-
+<style lang="scss" scoped>
+  .input-wrapper{
+    padding: 10px 0;
+  }
+</style>
 <script>
 export default {
   props: ["widget", "models", "rules", "remote"],

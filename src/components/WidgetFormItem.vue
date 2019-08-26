@@ -1,3 +1,9 @@
+<!--
+ * @Description: 
+ * @Author: Benny
+ * @Date: 2019-08-25 11:12:55
+ * @LastEditTime: 2019-08-26 18:21:44
+ -->
 <template>
   <div>
     <!-- 列标题-->
@@ -102,7 +108,7 @@ export default {
     };
   },
   mounted() {
-    console.log(this.element);
+    // console.log(this.element);
   },
   methods: {
     handleSelectWidget(index) {
