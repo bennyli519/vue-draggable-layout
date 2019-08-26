@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Benny
  * @Date: 2019-08-25 11:12:55
- * @LastEditTime: 2019-08-25 11:30:41
+ * @LastEditTime: 2019-08-26 10:42:47
  */
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
@@ -15,8 +15,8 @@ module.exports = {
     let plugins = [
       new UglifyJsPlugin({
         uglifyOptions: {
+          warnings: false,
           compress: {
-            warnings: false,
             drop_debugger: false,
             drop_console: true,
           },
