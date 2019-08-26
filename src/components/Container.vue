@@ -2,140 +2,77 @@
  * @Description: 
  * @Author: Benny
  * @Date: 2019-08-25 11:12:55
- * @LastEditTime: 2019-08-25 13:52:28
+ * @LastEditTime: 2019-08-26 10:36:12
  -->
 <template>
-  <el-container class="fm2-container">
+<el-container class="fm2-container">
     <el-main class="fm2-main">
-      <el-container>
-        <el-aside style="wdith: 250px;">
-          <div class="components-list">
-            <!-- 布局 -->
-            <div class="widget-cate">布局设置</div>
-            <draggable
-              tag="ul"
-              :list="layoutComponents"
-              v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}"
-              @start="handleMoveStart"
-              :move="handleMove"
-              @end="handleMoveEnd"
-            >
-              <li
-                class="form-edit-widget-label data-grid"
-                v-for="(item, index) in layoutComponents"
-                :key="index"
-              >
-                <a>
-                  <i class="icon iconfont" :class="item.icon"></i>
-                  <span>{{item.name}}</span>
-                </a>
-              </li>
-            </draggable>
-            <!-- 基础 -->
-            <div class="widget-cate">基础字段</div>
-            <draggable
-              tag="ul"
-              :list="basicComponents"
-              v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}"
-              @start="handleMoveStart"
-              :move="handleMove"
-              @end="handleMoveEnd"
-            >
-              <li
-                class="form-edit-widget-label"
-                v-for="(item, index) in basicComponents"
-                :key="index"
-              >
-                <a>
-                  <i class="icon iconfont" :class="item.icon"></i>
-                  <span>{{item.name}}</span>
-                </a>
-              </li>
-            </draggable>
-            <!-- 字段名 -->
-            <div class="widget-cate">数据库表字段</div>
-            <draggable
-              tag="ul"
-              :list="labelList"
-              v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}"
-              @start="handleMoveStart"
-              :move="handleMove"
-              @end="handleMoveEnd"
-            >
-              <li
-                class="form-edit-widget-label"
-                v-for="(item, index) in labelList"
-                :key="index"
-              >
-                <a>
-                  <i class="icon iconfont" :class="item.icon"></i>
-                  <span>{{item.name}}</span>
-                </a>
-              </li>
-            </draggable>
-          </div>
-        </el-aside>
-        <el-container class="center-container" direction="vertical">
-          <el-header class="btn-bar" style="height: 45px;">
-            <slot name="action"></slot>
-              <el-button
-              type="text"
-              size="medium"
-              icon="el-icon-document"
-              @click="resetLayout"
-            >清空布局</el-button>
-            <el-button
-              type="text"
-              size="medium"
-              icon="el-icon-view"
-              @click="handlePreview"
-            >{{!previewVisible?'预览':'取消预览'}}</el-button>
-            <el-button
-              type="text"
-              size="medium"
-              icon="el-icon-document"
-              @click="saveLayout"
-            >保存布局</el-button>
-            <el-button
-              type="text"
-              size="medium"
-              icon="el-icon-document"
-              @click="handleGenerateCode"
-            >生成代码</el-button>
-          </el-header>
-          <el-main :class="{'widget-empty': widgetForm.list.length == 0}">
-            <widget-form v-if="!previewVisible" ref="widgetForm"  style="z-index:20;background:#fff;" :data="widgetForm" :select.sync="widgetFormSelect"></widget-form>
-             <generate-form
-              style="z-index:10"
-              insite="true"
-              :data="widgetForm"
-              :value="widgetModels"
-              ref="generateForm"
-            ></generate-form>
-          </el-main>
-        </el-container>
+        <el-container>
+            <el-aside style="wdith: 250px;">
+                <div class="components-list">
+                    <!-- 布局 -->
+                    <div class="widget-cate">布局设置</div>
+                    <draggable tag="ul" :list="layoutComponents" v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}" @start="handleMoveStart" :move="handleMove" @end="handleMoveEnd">
+                        <li class="form-edit-widget-label data-grid" v-for="(item, index) in layoutComponents" :key="index">
+                            <a>
+                                <i class="icon iconfont" :class="item.icon"></i>
+                                <span>{{item.name}}</span>
+                            </a>
+                        </li>
+                    </draggable>
+                    <!-- 基础 -->
+                    <div class="widget-cate">基础字段</div>
+                    <draggable tag="ul" :list="basicComponents" v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}" @start="handleMoveStart" :move="handleMove" @end="handleMoveEnd">
+                        <li class="form-edit-widget-label" v-for="(item, index) in basicComponents" :key="index">
+                            <a>
+                                <i class="icon iconfont" :class="item.icon"></i>
+                                <span>{{item.name}}</span>
+                            </a>
+                        </li>
+                    </draggable>
+                    <!-- 字段名 -->
+                    <div class="widget-cate">数据库表字段</div>
+                    <draggable tag="ul" :list="labelList" v-bind="{group:{ name:'people', pull:'clone',put:false},sort:false, ghostClass: 'ghost'}" @start="handleMoveStart" :move="handleMove" @end="handleMoveEnd">
+                        <li class="form-edit-widget-label" v-for="(item, index) in labelList" :key="index">
+                            <a>
+                                <i class="icon iconfont" :class="item.icon"></i>
+                                <span>{{item.name}}</span>
+                            </a>
+                        </li>
+                    </draggable>
+                </div>
+            </el-aside>
+            <el-container class="center-container" direction="vertical">
+                <el-header class="btn-bar" style="height: 45px;">
+                    <slot name="action"></slot>
+                    <el-button type="text" size="medium" icon="el-icon-document" @click="resetLayout">清空布局</el-button>
+                    <el-button type="text" size="medium" icon="el-icon-view" @click="handlePreview">{{!previewVisible?'预览':'取消预览'}}</el-button>
+                    <el-button type="text" size="medium" icon="el-icon-document" @click="saveLayout">保存布局</el-button>
+                    <el-button type="text" size="medium" icon="el-icon-document" @click="handleGenerateCode">生成代码</el-button>
+                </el-header>
+                <el-main :class="{'widget-empty': widgetForm.list.length == 0}">
+                    <widget-form v-if="!previewVisible" ref="widgetForm" style="z-index:20;background:#fff;" :data="widgetForm" :select.sync="widgetFormSelect"></widget-form>
+                    <generate-form style="z-index:10" insite="true" :data="widgetForm" :value="widgetModels" ref="generateForm"></generate-form>
+                </el-main>
+            </el-container>
 
-        <el-aside class="widget-config-container">
-          <el-container>
-            <el-header height="45px">
-              <div
-                class="config-tab"
-                :class="{active: configTab=='widget'}"
-                @click="handleConfigSelect('widget')"
-              >字段属性</div>
-              <!-- <div
+            <el-aside class="widget-config-container">
+                <el-container>
+                    <el-header height="45px">
+                        <div class="config-tab" :class="{active: configTab=='widget'}" @click="handleConfigSelect('widget')">字段属性</div>
+                        <!-- <div
                 class="config-tab"
                 :class="{active: configTab=='form'}"
                 @click="handleConfigSelect('form')"
               >表单属性</div> -->
-            </el-header>
-            <el-main class="config-content">
-              <widget-config v-show="configTab=='widget'" :data="widgetFormSelect"></widget-config>
-              <form-config v-show="configTab=='form'" :data="widgetForm.config"></form-config>
-            </el-main>
-          </el-container>
-        </el-aside>
-<!-- 
+                    </el-header>
+                    <el-main class="config-content">
+                        <widget-config v-show="configTab=='widget'" :data="widgetFormSelect"></widget-config>
+                        <form-config v-show="configTab=='form'" :data="widgetForm.config"></form-config>
+                    </el-main>
+                </el-container>
+            </el-aside>
+            <!-- 
         <cus-dialog
           :visible="previewVisible"
           @on-close="previewVisible = false"
@@ -152,24 +89,16 @@
             ref="generateForm"
           ></generate-form>
         </cus-dialog> -->
-        <cus-dialog
-          :visible="codeVisible"
-          @on-close="codeVisible = false"
-          ref="codePreview"
-          width="800px"
-          form
-          :action="false"
-        >
-          <div id="codeeditor" style="height: 500px; width: 100%;">{{htmlTemplate}}</div>
-        </cus-dialog>
-      </el-container>
+            <cus-dialog :visible="codeVisible" @on-close="codeVisible = false" ref="codePreview" width="800px" form :action="false">
+                <div id="codeeditor" style="height: 500px; width: 100%;">{{htmlTemplate}}</div>
+            </cus-dialog>
+        </el-container>
     </el-main>
-  </el-container>
+</el-container>
 </template>
 
 <script>
 import axios from 'axios';
-import {Decrypt,Encrypt} from '../util/secret.js';
 import Draggable from "vuedraggable";
 import WidgetConfig from "./WidgetConfig";
 import FormConfig from "./FormConfig";
@@ -177,151 +106,158 @@ import WidgetForm from "./WidgetForm";
 import CusDialog from "./CusDialog";
 import GenerateForm from "./GenerateForm";
 import {
-  basicComponents,
-  labelList,
-  layoutComponents,
-  panel
+    basicComponents,
+    labelList,
+    layoutComponents,
+    panel
 } from "./componentsConfig.js";
 import generateCode from "./generateCode.js";
 
 export default {
-  name: "fm-making-form",
-  components: {
-    Draggable,
-    WidgetConfig,
-    FormConfig,
-    WidgetForm,
-    CusDialog,
-    GenerateForm
-  },
-  data() {
-    return {
-      basicComponents,
-      layoutComponents,
-      // labelList,
-      panel,
-      widgetForm: {
-        list: [],
-        config: {
-          labelWidth: 100,
-          labelPosition: "top",
-          size: "small"
-        }
-      },
-      configTab: "widget",
-      widgetFormSelect: null,
-      previewVisible: false,
-      codeVisible: false,
-      widgetModels: {},
-      htmlTemplate: "",
-      labelList:[]
-
-    };
-  },
-  created(){
-    axios.post('/api/FormFieldGet.aspx?MyType=Flow&&MyForm=systipsNew')
-    .then((res)=>{
-      if(res.status == 200){
-        if(res.data.result == "true"){
-          res.data.detail = res.data.detail.split('|') 
-          res.data.detail.map(item=>{
-            this.labelList.push({
-                type: 'label',
-                name: item,
-                icon: 'icon-input',
-                options: {
-                  width: '100%',
-                  defaultValue: 'aaa',
+    name: "fm-making-form",
+    components: {
+        Draggable,
+        WidgetConfig,
+        FormConfig,
+        WidgetForm,
+        CusDialog,
+        GenerateForm
+    },
+    data() {
+        return {
+            basicComponents,
+            layoutComponents,
+            // labelList,
+            panel,
+            widgetForm: {
+                list: [],
+                config: {
+                    labelWidth: 100,
+                    labelPosition: "top",
+                    size: "small"
                 }
-            })
-          })
-          console.log(res.data)
-        }
-      }
-    }).catch((error)=>{
-      console.log(error)//错误处理 相当于error
-    })
-  },
-  mounted() {
- 
-  },
-  methods: {
-    saveLayout(){
-      this.htmlTemplate = HTMLFormat(this.$refs.generateForm.$el.innerHTML)
-      console.log(this.htmlTemplate)
-      console.log(encodeURI(this.htmlTemplate))
-      // console.log(JSON.stringify(this.widgetForm))
-      axios.post('/api/FormFieldSave.aspx',{
-        MyType:'Form',
-        MyForm:'MyDemoTableIntoAllForm',
-        PageContent:encodeURI(this.htmlTemplate).replace(/\/\%/g,'-'),
-        PageJson:encodeURI(JSON.stringify(this.widgetForm)).replace(/\/\%/g,'-')
-      })
-      .then((res)=>{
-          console.log(res)
+            },
+            configTab: "widget",
+            widgetFormSelect: {},
+            previewVisible: false,
+            codeVisible: false,
+            widgetModels: {},
+            htmlTemplate: "",
+            labelList: [],
+            flag: false,
+
+        };
+    },
+    created() {
+        axios.post('/api/FormFieldGet.aspx?MyType=Flow&&MyForm=systipsNew')
+        .then((res)=>{
+          if(res.status == 200){
+            if(res.data.result == "true"){
+              this.flag = true;
+              res.data.data = JSON.parse(decodeURI(res.data.data))
+              console.log(JSON.stringify(res.data.data))
+              this.widgetForm = res.data.data
+              res.data.detail = res.data.detail.split('|') 
+              res.data.detail.map(item=>{
+                this.labelList.push({
+                    type: 'label',
+                    name: item,
+                    icon: 'icon-input',
+                    options: {
+                      width: '100%',
+                      defaultValue: 'aaa',
+                    }
+                })
+              })
+              console.log(res.data)
+            }
+          }
         }).catch((error)=>{
           console.log(error)//错误处理 相当于error
         })
     },
-    resetLayout(){
-      this.widgetForm = {
-        list: [],
-        config: {
-          labelWidth: 100,
-          labelPosition: "top",
-          size: "small"
-        }
-      }
-     this.widgetFormSelect = null
-    },
-    handleConfigSelect(value) {
-      this.configTab = value;
-    },
-    handleMoveEnd(evt) {
-     console.log("拖动结束", evt);
-    },
-    handleMoveStart({ oldIndex }) {
-      console.log("开始拖动", oldIndex);
-    },
-    handleMove() {
-      return true;
-    },
-    handlePreview() {
-      this.previewVisible = !this.previewVisible;
-    },
-    handleTest() {
-      this.$alert('提交了～～')
-      this.$refs.widgetPreview.end();
-    }, 
+    mounted() {
 
-    handleGenerateCode() {
-      this.codeVisible = true;
-      this.htmlTemplate = HTMLFormat(this.$refs.generateForm.$el.innerHTML)
-      console.log(this.htmlTemplate)
-      this.$nextTick(() => {
-        const editor = ace.edit("codeeditor");
-        editor.session.setMode("ace/mode/html");
-        editor.setOption("wrap", "free")
-        
-      });
     },
-  },
-  watch: {
-    widgetForm: {
-      deep: true,
-      handler: function(val) {
-       // console.log(val)
-      }
+    methods: {
+        saveLayout() {
+            this.htmlTemplate = HTMLFormat(this.$refs.generateForm.$el.innerHTML)
+            console.log(this.htmlTemplate)
+            console.log(encodeURI(this.htmlTemplate))
+            // console.log(JSON.stringify(this.widgetForm))
+            axios.post('/api/FormFieldSave.aspx', {
+                    MyType: 'Flow',
+                    MyForm: 'systipsNew',
+                    PageContent: encodeURI(this.htmlTemplate).replace(/\/\%/g, '-'),
+                    PageJson: encodeURI(JSON.stringify(this.widgetForm)).replace(/\/\%/g, '-')
+                })
+                .then((res) => {
+                    console.log(res)
+                }).catch((error) => {
+                    console.log(error) //错误处理 相当于error
+                })
+        },
+        resetLayout() {
+            this.widgetForm = {
+                list: [],
+                config: {
+                    labelWidth: 100,
+                    labelPosition: "top",
+                    size: "small"
+                }
+            }
+            this.widgetFormSelect = null
+        },
+        handleConfigSelect(value) {
+            this.configTab = value;
+        },
+        handleMoveEnd(evt) {
+            console.log("拖动结束", evt);
+        },
+        handleMoveStart({
+            oldIndex
+        }) {
+            console.log("开始拖动", oldIndex);
+        },
+        handleMove() {
+            return true;
+        },
+        handlePreview() {
+            this.previewVisible = !this.previewVisible;
+        },
+        handleTest() {
+            this.$alert('提交了～～')
+            this.$refs.widgetPreview.end();
+        },
+
+        handleGenerateCode() {
+            this.codeVisible = true;
+            this.htmlTemplate = HTMLFormat(this.$refs.generateForm.$el.innerHTML)
+            console.log(this.htmlTemplate)
+            this.$nextTick(() => {
+                const editor = ace.edit("codeeditor");
+                editor.session.setMode("ace/mode/html");
+                editor.setOption("wrap", "free")
+
+            });
+        },
+    },
+    watch: {
+        widgetForm: {
+            deep: true,
+            handler: function (val) {
+                // console.log(val)
+            }
+        }
     }
-  }
 };
 //格式化代码
-var HTMLFormat = (function() {
+var HTMLFormat = (function () {
     function style_html(html_source, indent_size, indent_character, max_char) {
         var Parser, multi_parser;
- 
+
         function Parser() {
- 
+
             this.pos = 0;
             this.token = '';
             this.current_mode = 'CONTENT';
@@ -332,13 +268,12 @@ var HTMLFormat = (function() {
             };
             this.tag_type = '';
             this.token_text = this.last_token = this.last_text = this.token_type = '';
- 
- 
+
             this.Utils = {
                 whitespace: "\n\r\t ".split(''),
                 single_token: 'br,input,link,meta,!doctype,basefont,base,area,hr,wbr,param,img,isindex,?xml,embed'.split(','),
                 extra_liners: 'head,body,/html'.split(','),
-                in_array: function(what, arr) {
+                in_array: function (what, arr) {
                     for (var i = 0; i < arr.length; i++) {
                         if (what === arr[i]) {
                             return true;
@@ -347,8 +282,8 @@ var HTMLFormat = (function() {
                     return false;
                 }
             }
- 
-            this.get_content = function() {
+
+            this.get_content = function () {
                 var char = '';
                 var content = [];
                 var space = false;
@@ -356,12 +291,11 @@ var HTMLFormat = (function() {
                     if (this.pos >= this.input.length) {
                         return content.length ? content.join('') : ['', 'TK_EOF'];
                     }
- 
+
                     char = this.input.charAt(this.pos);
                     this.pos++;
                     this.line_char_count++;
- 
- 
+
                     if (this.Utils.in_array(char, this.Utils.whitespace)) {
                         if (content.length) {
                             space = true;
@@ -385,8 +319,8 @@ var HTMLFormat = (function() {
                 }
                 return content.length ? content.join('') : '';
             }
- 
-            this.get_script = function() {
+
+            this.get_script = function () {
                 var char = '';
                 var content = [];
                 var reg_match = new RegExp('\<\/script' + '\>', 'igm');
@@ -397,17 +331,16 @@ var HTMLFormat = (function() {
                     if (this.pos >= this.input.length) {
                         return content.length ? content.join('') : ['', 'TK_EOF'];
                     }
- 
+
                     char = this.input.charAt(this.pos);
                     this.pos++;
- 
- 
+
                     content.push(char);
                 }
                 return content.length ? content.join('') : '';
             }
- 
-            this.record_tag = function(tag) {
+
+            this.record_tag = function (tag) {
                 if (this.tags[tag + 'count']) {
                     this.tags[tag + 'count']++;
                     this.tags[tag + this.tags[tag + 'count']] = this.indent_level;
@@ -418,8 +351,8 @@ var HTMLFormat = (function() {
                 this.tags[tag + this.tags[tag + 'count'] + 'parent'] = this.tags.parent;
                 this.tags.parent = tag + this.tags[tag + 'count'];
             }
- 
-            this.retrieve_tag = function(tag) {
+
+            this.retrieve_tag = function (tag) {
                 if (this.tags[tag + 'count']) {
                     var temp_parent = this.tags.parent;
                     while (temp_parent) {
@@ -441,38 +374,38 @@ var HTMLFormat = (function() {
                     }
                 }
             }
- 
-            this.get_tag = function() {
+
+            this.get_tag = function () {
                 var char = '';
                 var content = [];
                 var space = false;
- 
+
                 do {
                     if (this.pos >= this.input.length) {
                         return content.length ? content.join('') : ['', 'TK_EOF'];
                     }
- 
+
                     char = this.input.charAt(this.pos);
                     this.pos++;
                     this.line_char_count++;
- 
+
                     if (this.Utils.in_array(char, this.Utils.whitespace)) {
                         space = true;
                         this.line_char_count--;
                         continue;
                     }
- 
+
                     if (char === "'" || char === '"') {
                         if (!content[1] || content[1] !== '!') {
                             char += this.get_unformatted(char);
                             space = true;
                         }
                     }
- 
+
                     if (char === '=') {
                         space = false;
                     }
- 
+
                     if (content.length && content[content.length - 1] !== '=' && char !== '>' && space) {
                         if (this.line_char_count >= this.max_char) {
                             this.print_newline(false, content);
@@ -485,7 +418,7 @@ var HTMLFormat = (function() {
                     }
                     content.push(char);
                 } while (char !== '>');
- 
+
                 var tag_complete = content.join('');
                 var tag_index;
                 if (tag_complete.indexOf(' ') != -1) {
@@ -535,8 +468,8 @@ var HTMLFormat = (function() {
                 }
                 return content.join('');
             }
- 
-            this.get_unformatted = function(delimiter, orig_tag) {
+
+            this.get_unformatted = function (delimiter, orig_tag) {
                 if (orig_tag && orig_tag.indexOf(delimiter) != -1) {
                     return '';
                 }
@@ -544,11 +477,10 @@ var HTMLFormat = (function() {
                 var content = '';
                 var space = true;
                 do {
- 
- 
+
                     char = this.input.charAt(this.pos);
                     this.pos++
- 
+
                     if (this.Utils.in_array(char, this.Utils.whitespace)) {
                         if (!space) {
                             this.line_char_count--;
@@ -567,15 +499,14 @@ var HTMLFormat = (function() {
                     content += char;
                     this.line_char_count++;
                     space = true;
- 
- 
+
                 } while (content.indexOf(delimiter) == -1);
                 return content;
             }
- 
-            this.get_token = function() {
+
+            this.get_token = function () {
                 var token;
- 
+
                 if (this.last_token === 'TK_TAG_SCRIPT') {
                     var temp_token = this.get_script();
                     if (typeof temp_token !== 'string') {
@@ -593,7 +524,7 @@ var HTMLFormat = (function() {
                         return [token, 'TK_CONTENT'];
                     }
                 }
- 
+
                 if (this.current_mode === 'TAG') {
                     token = this.get_tag();
                     if (typeof token !== 'string') {
@@ -604,8 +535,8 @@ var HTMLFormat = (function() {
                     }
                 }
             }
- 
-            this.printer = function(js_source, indent_character, indent_size, max_char) {
+
+            this.printer = function (js_source, indent_character, indent_size, max_char) {
                 this.input = js_source || '';
                 this.output = [];
                 this.indent_character = indent_character || ' ';
@@ -617,8 +548,8 @@ var HTMLFormat = (function() {
                 for (var i = 0; i < this.indent_size; i++) {
                     this.indent_string += this.indent_character;
                 }
- 
-                this.print_newline = function(ignore, arr) {
+
+                this.print_newline = function (ignore, arr) {
                     this.line_char_count = 0;
                     if (!arr || !arr.length) {
                         return;
@@ -633,17 +564,16 @@ var HTMLFormat = (function() {
                         arr.push(this.indent_string);
                     }
                 }
- 
- 
-                this.print_token = function(text) {
+
+                this.print_token = function (text) {
                     this.output.push(text);
                 }
- 
-                this.indent = function() {
+
+                this.indent = function () {
                     this.indent_level++;
                 }
- 
-                this.unindent = function() {
+
+                this.unindent = function () {
                     if (this.indent_level > 0) {
                         this.indent_level--;
                     }
@@ -651,79 +581,73 @@ var HTMLFormat = (function() {
             }
             return this;
         }
- 
- 
- 
- 
+
         multi_parser = new Parser();
         multi_parser.printer(html_source, indent_character, indent_size);
         while (true) {
             var t = multi_parser.get_token();
             multi_parser.token_text = t[0];
             multi_parser.token_type = t[1];
- 
+
             if (multi_parser.token_type === 'TK_EOF') {
                 break;
             }
- 
- 
+
             switch (multi_parser.token_type) {
-            case 'TK_TAG_START':
-            case 'TK_TAG_SCRIPT':
-            case 'TK_TAG_STYLE':
-                multi_parser.print_newline(false, multi_parser.output);
-                multi_parser.print_token(multi_parser.token_text);
-                multi_parser.indent();
-                multi_parser.current_mode = 'CONTENT';
-                break;
-            case 'TK_TAG_END':
-                multi_parser.print_newline(true, multi_parser.output);
-                multi_parser.print_token(multi_parser.token_text);
-                multi_parser.current_mode = 'CONTENT';
-                break;
-            case 'TK_TAG_SINGLE':
-                multi_parser.print_newline(false, multi_parser.output);
-                multi_parser.print_token(multi_parser.token_text);
-                multi_parser.current_mode = 'CONTENT';
-                break;
-            case 'TK_CONTENT':
-                if (multi_parser.token_text !== '') {
+                case 'TK_TAG_START':
+                case 'TK_TAG_SCRIPT':
+                case 'TK_TAG_STYLE':
                     multi_parser.print_newline(false, multi_parser.output);
                     multi_parser.print_token(multi_parser.token_text);
-                }
-                multi_parser.current_mode = 'TAG';
-                break;
+                    multi_parser.indent();
+                    multi_parser.current_mode = 'CONTENT';
+                    break;
+                case 'TK_TAG_END':
+                    multi_parser.print_newline(true, multi_parser.output);
+                    multi_parser.print_token(multi_parser.token_text);
+                    multi_parser.current_mode = 'CONTENT';
+                    break;
+                case 'TK_TAG_SINGLE':
+                    multi_parser.print_newline(false, multi_parser.output);
+                    multi_parser.print_token(multi_parser.token_text);
+                    multi_parser.current_mode = 'CONTENT';
+                    break;
+                case 'TK_CONTENT':
+                    if (multi_parser.token_text !== '') {
+                        multi_parser.print_newline(false, multi_parser.output);
+                        multi_parser.print_token(multi_parser.token_text);
+                    }
+                    multi_parser.current_mode = 'TAG';
+                    break;
             }
             multi_parser.last_token = multi_parser.token_type;
             multi_parser.last_text = multi_parser.token_text;
         }
         return multi_parser.output.join('');
     }
- 
-    return function(data) {
+
+    return function (data) {
         var dataHolder = ['__dataHolder_', [Math.random(), Math.random(), Math.random(), Math.random()].join('_').replace(/[^0-9]/g, '_'), '_'].join('_');
         var dataHolders = {};
         var index = 0;
-        data = data.replace(/(\")(data:[^\"]*)(\")/g, function($0, $1, $2, $3) {
+        data = data.replace(/(\")(data:[^\"]*)(\")/g, function ($0, $1, $2, $3) {
             var name = dataHolder + index++;
             dataHolders[name] = $2;
             return $1 + name + $3;
         })
         data = style_html(data, 1, '\t', 0x10000000);
-        data = data.replace(new RegExp(dataHolder + '[0-9]+', 'g'), function($0) {
+        data = data.replace(new RegExp(dataHolder + '[0-9]+', 'g'), function ($0) {
             return dataHolders[$0];
         });
- 
+
         return data;
     }
 })();
- 
 </script>
 
 <style lang="scss">
 .widget-empty {
-  background: url("../assets/form_empty.png") no-repeat;
-  background-position: 50%;
+    background: url("../assets/form_empty.png") no-repeat;
+    background-position: 50%;
 }
-
 </style>

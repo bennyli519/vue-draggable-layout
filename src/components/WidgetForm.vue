@@ -1,3 +1,9 @@
+<!--
+ * @Description: 
+ * @Author: Benny
+ * @Date: 2019-08-25 11:12:55
+ * @LastEditTime: 2019-08-26 10:32:50
+ -->
 <template>
   <div class="widget-form-container">
     <el-form
@@ -119,6 +125,9 @@ export default {
         } 
        },
     };
+  },
+  created(){
+    console.log(this.data)
   },
   mounted() {
     document.body.ondrop = function(event) {
