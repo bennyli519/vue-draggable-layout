@@ -18,8 +18,8 @@
   },
   "main": "dist/FormMaking.common.js",
   "scripts": {
-    "serve": "vue-cli-service serve --open",
-    "build": "vue-cli-service build",
+    "serve": "vue-cli-service serve --mode development --open",
+    "build": "vue-cli-service build --mode production",
     "lint": "vue-cli-service lint",
     "build-bundle": "vue-cli-service build --target lib --name FormMaking ./src/index.js",
     "predeploy":"npm run build",

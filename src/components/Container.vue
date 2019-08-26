@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Benny
  * @Date: 2019-08-25 11:12:55
- * @LastEditTime: 2019-08-26 10:36:12
+ * @LastEditTime: 2019-08-26 11:26:59
  -->
 <template>
 <el-container class="fm2-container">
@@ -112,6 +112,7 @@ import {
     panel
 } from "./componentsConfig.js";
 import generateCode from "./generateCode.js";
+import api from '../util/api';
 
 export default {
     name: "fm-making-form",
@@ -149,7 +150,8 @@ export default {
         };
     },
     created() {
-        axios.post('/api/FormFieldGet.aspx?MyType=Flow&&MyForm=systipsNew')
+        console.log(api.getForm)
+        axios.post(api.getForm)
         .then((res)=>{
           if(res.status == 200){
             if(res.data.result == "true"){
@@ -185,7 +187,7 @@ export default {
             console.log(this.htmlTemplate)
             console.log(encodeURI(this.htmlTemplate))
             // console.log(JSON.stringify(this.widgetForm))
-            axios.post('/api/FormFieldSave.aspx', {
+            axios.post(api.saveForm, {
                     MyType: 'Flow',
                     MyForm: 'systipsNew',
                     PageContent: encodeURI(this.htmlTemplate).replace(/\/\%/g, '-'),
