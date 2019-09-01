@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Benny
  * @Date: 2019-08-25 11:12:55
- * @LastEditTime: 2019-08-25 11:47:51
+ * @LastEditTime: 2019-09-01 14:27:33
  */
 
 
@@ -100,7 +100,7 @@ export const layoutComponents = [
   {
     type: 'grid',
     name: '一整行(24)',
-    title:'大标题',
+    title:' ',
     icon: 'icon-grid-',
     columns: [
       {
@@ -114,7 +114,7 @@ export const layoutComponents = [
         width:1,
         color:'#eee',
       },
-      gutter: 20,
+      gutter: 10,
       justify: 'start',
       align: 'top'
     }
@@ -122,7 +122,7 @@ export const layoutComponents = [
   {
     type: 'grid',
     name: '一行2列(12:12)',
-    title:'大标题',
+    title:' ',
     icon: 'icon-grid-',
     columns: [
       {
@@ -140,7 +140,7 @@ export const layoutComponents = [
         width:1,
         color:'#eee',
       },
-      gutter: 20,
+      gutter: 10,
       justify: 'start',
       align: 'top'
     }
@@ -148,7 +148,7 @@ export const layoutComponents = [
   {
     type: 'grid',
     name: '一行3列(8:8:8)',
-    title:'大标题',
+    title:' ',
     icon: 'icon-grid-',
     columns: [
       {
@@ -170,7 +170,7 @@ export const layoutComponents = [
         width:1,
         color:'#eee',
       },
-      gutter: 20,
+      gutter: 10,
       justify: 'start',
       align: 'top'
     }
@@ -178,7 +178,7 @@ export const layoutComponents = [
   {
     name: '一行4列(6:6:6:6)',
     type: 'grid',
-    title:'大标题',
+    title:' ',
     icon: 'icon-grid-',
     columns: [
       {
@@ -204,7 +204,7 @@ export const layoutComponents = [
         width:1,
         color:'#eee',
       },
-      gutter: 20,
+      gutter: 10,
       justify: 'start',
       align: 'top'
     }
