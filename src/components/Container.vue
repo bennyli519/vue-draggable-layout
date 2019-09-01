@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Benny
  * @Date: 2019-08-25 11:12:55
- * @LastEditTime: 2019-08-26 18:18:35
+ * @LastEditTime: 2019-09-01 13:39:54
  -->
 <template>
 <el-container class="fm2-container">
@@ -255,8 +255,11 @@ export default {
 
         handleGenerateCode() {
             this.codeVisible = true;
+            if(this.widgetForm.list.length>0)
             this.htmlTemplate = HTMLFormat(this.$refs.generateForm.$el.innerHTML)
-            console.log(this.htmlTemplate)
+            else
+            this.htmlTemplate = ''
+            
             this.$nextTick(() => {
                 const editor = ace.edit("codeeditor");
                 editor.session.setMode("ace/mode/html");

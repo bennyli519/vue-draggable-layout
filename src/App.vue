@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Benny
  * @Date: 2019-08-25 11:12:55
- * @LastEditTime: 2019-08-25 11:58:19
+ * @LastEditTime: 2019-09-01 13:44:32
  -->
 <template>
   <div id="app">
@@ -11,7 +11,7 @@
       <div class="fm-title" @click="handleHome">拖拉布局</div>
 
       <div class="fm-link">
-        <a href="#">workiee</a>
+        <a href="#">imdos</a>
       </div>
     </div>
     <div class="fm-container"><router-view/></div>

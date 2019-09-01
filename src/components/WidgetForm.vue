@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Benny
  * @Date: 2019-08-25 11:12:55
- * @LastEditTime: 2019-08-26 17:49:07
+ * @LastEditTime: 2019-09-01 13:41:19
  -->
 <template>
   <div class="widget-form-container">
@@ -95,7 +95,7 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 
 .btn-style {
   position: absolute;

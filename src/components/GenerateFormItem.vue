@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Benny
  * @Date: 2019-08-25 11:12:55
- * @LastEditTime: 2019-08-26 18:21:18
+ * @LastEditTime: 2019-09-01 13:42:13
  -->
 <template>
   <!-- <el-form-item class="adsfasdfas" :label="widget.name+'1231'" :prop="widget.model">
@@ -38,7 +38,7 @@
     <div class="tablefield">{{widget.name}}</div>
   </div>
 </template>
-<style lang="scss" scoped>
+<style lang="scss">
   .input-wrapper{
     padding: 10px 0;
   }
