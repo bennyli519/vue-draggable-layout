@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Benny
  * @Date: 2019-08-25 11:12:55
- * @LastEditTime: 2019-08-26 18:21:44
+ * @LastEditTime: 2019-09-01 14:11:42
  -->
 <template>
   <div>
@@ -95,12 +95,12 @@
 
 <script>
 import FmUpload from "./Upload";
-import FmEditor from "./Editor/tinymce";
+// import FmEditor from "./Editor/tinymce";
 export default {
   props: ["element", "select", "index", "data"],
   components: {
     FmUpload,
-    FmEditor
+    // FmEditor
   },
   data() {
     return {
