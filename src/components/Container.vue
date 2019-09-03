@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Benny
  * @Date: 2019-08-25 11:12:55
- * @LastEditTime: 2019-09-01 13:39:54
+ * @LastEditTime: 2019-09-03 10:14:31
  -->
 <template>
 <el-container class="fm2-container">
@@ -172,8 +172,7 @@ export default {
                 .then((res) => {
                     if (res.status == 200) {
                         if (res.data.result == "true") {
-                            res.data.data = JSON.parse(decodeURI(res.data.data))
-                            this.widgetForm = res.data.data
+                 
                             res.data.detail = res.data.detail.split('|')
                             res.data.detail.map(item => {
                                 this.labelList.push({
@@ -186,6 +185,8 @@ export default {
                                     }
                                 })
                             })
+                            res.data.data = JSON.parse(decodeURI(res.data.data))
+                            this.widgetForm = res.data.data
                         }
                     }
                 }).catch((error) => {
