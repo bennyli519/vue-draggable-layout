@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Benny
  * @Date: 2019-08-25 11:12:55
- * @LastEditTime: 2019-08-25 11:53:33
+ * @LastEditTime: 2019-09-03 11:07:42
  -->
 <template>
   <div v-if="show">
@@ -159,7 +159,6 @@ export default {
     }
   },
   created(){
-    console.log(this.data)
   },
   computed: {
     show () {

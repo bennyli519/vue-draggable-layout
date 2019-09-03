@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Benny
  * @Date: 2019-08-25 11:12:55
- * @LastEditTime: 2019-09-01 13:42:06
+ * @LastEditTime: 2019-09-03 11:07:33
  -->
 
 <template>
@@ -94,7 +94,6 @@ export default {
     };
   },
   created() {
-    console.log(this.data.list);
     this.generateModle(this.data.list);
   },
   mounted() {},
